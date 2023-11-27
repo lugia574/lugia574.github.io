@@ -4,9 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
-    <h1>이것은 깃헙 연결 확인 테스트입니다.</h1>
+    <div class="wrap">
+      <header>
+        <h1 class="title">이철욱의 포트폴리오입니다.</h1>
+        <p class="doc_description">
+          안녕하세요 항상 재밌는걸 만들고 싶은 이철욱입니다. <br />
+          제 프로젝트를 소개합니다.
+        </p>
+      </header>
+      <main>
+        <div class="container">
+          <!-- 이미지에 커서를 올려주면 커지는 -->
+          <a href="./views/dancing.html">
+            <img class="container_img" src="./pictures/dancing.jpg" alt="" />
+          </a>
+          <!-- 제목 -->
+          <p>강아지</p>
+        </div>
+
+        <div class="container">
+          <!-- 이미지에 커서를 올려주면 커지는 -->
+          <a href="./views/mountain.html">
+            <img class="container_img" src="./pictures/mountain.png" alt="" />
+          </a>
+          <!-- 제목 -->
+          <p>풍경</p>
+          <p></p>
+        </div>
+
+        <div class="container">
+          <!-- 이미지에 커서를 올려주면 커지는 -->
+          <a href="./views/cat.html">
+            <img class="container_img" src="./pictures/cat.jpg" alt="" />
+          </a>
+          <!-- 제목 -->
+          <p>동물</p>
+        </div>
+      </main>
+      <img class="bg_img" src="./pictures/bg_img.jpg" alt="" />
+    </div>
   </body>
 </html>
