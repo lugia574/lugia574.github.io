@@ -15,34 +15,59 @@
       </header>
       <main>
         <div class="container">
-          <!-- 이미지에 커서를 올려주면 커지는 -->
           <a href="./views/dancing.html">
-            <img class="container_img" src="./pictures/dancing.jpg" alt="" />
+            <div class="panel">
+              <div class="overlay"></div>
+              <img class="container_img" src="./pictures/mountain.png" alt="" />
+            </div>
           </a>
-          <!-- 제목 -->
           <p>미정1</p>
         </div>
 
         <div class="container">
-          <!-- 이미지에 커서를 올려주면 커지는 -->
-          <a href="./views/mountain.html">
-            <img class="container_img" src="./pictures/mountain.png" alt="" />
+          <a href="./views/dancing.html">
+            <div class="panel">
+              <div class="overlay"></div>
+              <img class="container_img" src="./pictures/mountain.png" alt="" />
+            </div>
           </a>
-          <!-- 제목 -->
-          <p>미정2</p>
-          <p></p>
+          <p>미정1</p>
         </div>
 
         <div class="container">
-          <!-- 이미지에 커서를 올려주면 커지는 -->
-          <a href="./views/cat.html">
-            <img class="container_img" src="./pictures/cat.jpg" alt="" />
+          <a href="./views/dancing.html">
+            <div class="panel">
+              <div class="overlay"></div>
+              <img class="container_img" src="./pictures/mountain.png" alt="" />
+            </div>
           </a>
-          <!-- 제목 -->
-          <p>미정3</p>
+          <p>미정1</p>
         </div>
       </main>
       <img class="bg_img" src="./pictures/bg_img.jpg" alt="" />
     </div>
+    <script>
+      const panels = document.querySelectorAll(".panel");
+      const img = document.querySelector(".container_img");
+      const overlays = document.querySelectorAll(".overlay");
+      panels.forEach((panel, index) => {
+        panel.addEventListener("mousemove", (e) => {
+          let x = e.offsetX;
+          let y = e.offsetY;
+          let rotateX = (4 / 30) * y - 20;
+          let rotateY = (-1 / 5) * x + 20;
+
+          overlays[index].style = `background-position : ${x / 5 + y / 5}%`;
+
+          panel.style = `transform :perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        panel.addEventListener("mouseout", (e) => {
+          overlays[index].style = "filter : brightness(1.1) opacity(0.8)";
+          panel.style =
+            "transform :perspective(350px) rotateX(0deg) rotateY(0deg)";
+        });
+      });
+    </script>
   </body>
 </html>

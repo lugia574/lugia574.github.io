@@ -58,13 +58,16 @@ main {
 }
 
 .container {
-  margin: 1rem;
-  width: 30%;
+  margin: 0 2rem;
+  width: 220px;
+  height: 310px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   animation: fadein 3s;
+  transition: all 0.1s;
+  position: relative;
 }
 
 @keyframes fadein {
@@ -79,15 +82,29 @@ main {
   }
 }
 
-.container_img {
+.overlay {
+  position: absolute;
   width: 220px;
-  height: 220px;
-  margin: 2rem;
+  height: 310px;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.8) 45%,
+    rgba(230, 149, 209, 0.6) 50%,
+    transparent 54%
+  );
+  filter: brightness(1.1) opacity(0.8);
+  mix-blend-mode: color-dodge;
+  background-size: 150% 150%;
+  background-position: 100%;
+  transition: all 0.1s;
   border-radius: 1rem;
 }
 
-.container_img:hover {
-  transform: scale(1.2);
+.container_img {
+  width: 220px;
+  height: 310px;
+  border-radius: 1rem;
 }
 
 .bg_img {
