@@ -6,7 +6,7 @@
 
 - Method : POST
 
-- URL : /join
+- URL : /users/join
 
 - HTTP status code : 성공 - 201, 실패 - 404
 
@@ -32,7 +32,7 @@
 
 - Method : POST
 
-- URL : /login
+- URL : /users/login
 
 - HTTP status code : 성공 - 200, 실패 - 404
 
@@ -45,7 +45,7 @@
   }
   ```
 
-- Response Body : JWT Token
+- Response cookie : JWT Token
 
 ### 3. 비밀번호 초기화 API
 
@@ -55,7 +55,7 @@
 
 - Method : POST
 
-- URL : /reset
+- URL : /users/reset
 
 - HTTP status code : 성공 - 200, 실패 - 400?
 
@@ -69,13 +69,17 @@
 
 - Response Body :
 
-  비밀번호 초기화 화면으로 리다이렉트 해줘야 하는거 아님??
+  ```js
+  {
+    email: "이메일";
+  }
+  ```
 
 #### 3-2. 비밀번호 초기화(수정)
 
 - Method : PUT
 
-- URL : /reset
+- URL : /users/reset
 
 - HTTP status code : 성공 - 200, 실패 - 400?
 
@@ -83,8 +87,8 @@
 
   ```js
   {
+    email : "이전에 입력했던 email"
     password: "사용자가 입력한 비밀번호",
-    password확인: "사용자가 재입력한 비밀번호"
   }
   ```
 
@@ -111,6 +115,7 @@
     {
       id: "도서 id",
       title: "도서 이름",
+      img: "이미지 id",
       summary: "요약 설명",
       author: "도서 작가",
       price: "가격",
@@ -139,6 +144,7 @@
   {
     id: "도서 id",
     title: "도서 이름",
+    img: "이미지 id",
     category : "카테고리",
     fomat : "포맷",
     isbn : "isbn",
@@ -149,7 +155,6 @@
     index : "목차",
     price: "가격",
     likes: "좋아요 수",
-    liked : boolean,
     pubDate : "출간일"
   }
   ```
@@ -179,6 +184,7 @@ false 면 카테고리 전체
     {
       id: "도서 id",
       title: "도서 이름",
+      img: "이미지 id",
       summary: "요약 설명",
       author: "도서 작가",
       price: "가격",
@@ -189,13 +195,35 @@ false 면 카테고리 전체
   ];
   ```
 
+### 카테고리 전체 조회
+
+- Method : GET
+
+- URL : /category
+
+- HTTP status code : 성공 - 200
+
+- Request Body :
+
+- Response Body :
+
+  ```js
+  [
+    {
+      id: "id",
+      name: "name",
+    },
+    ...
+  ];
+  ```
+
 ## 3. 좋아요 API
 
 ### 1. 좋아요 추가
 
 기존에 있는 행에 수정을 하는거임
 
-- Method : PUT
+- Method : POST
 
 - URL : /likes/{:bookId}
 
@@ -207,11 +235,9 @@ false 면 카테고리 전체
 
 ### 2. 좋아요 취소
 
-※ DB 설계 하면서 다시 한번 보자
+- Method : DELETE
 
-- Method : PUT
-
-- URL : /likes/{:bookId} ???? URL 이 겹침
+- URL : /likes/{:bookId}
 
 - HTTP status code : 성공 - 200
 
@@ -279,9 +305,7 @@ false 면 카테고리 전체
 
 - Response Body :
 
-## 5. 주문 API
-
-### 1. 장바구니 선택 상품 조회
+### 4. 장바구니 선택 상품 조회
 
 - Method : GET
 
@@ -292,7 +316,9 @@ false 면 카테고리 전체
 - Request Body :
 
   ```js
-
+  [
+    cartltemId, ....
+  ]
   ```
 
 - Response Body :
@@ -312,14 +338,92 @@ false 면 카테고리 전체
   ];
   ```
 
-## 양식
+## 5. 주문(결제) API
 
-- Method :
+### 1. 결제
 
-- URL :
+결제를 하면 장바구니에서 주문된 상품은 DELETE 되야함
 
-- HTTP status code :
+- Method : POST
+
+- URL : /orders
+
+- HTTP status code : 성공 - 200
+
+- Request Body :
+
+  ```js
+  {
+    items : [{
+      cartltemId "cartltemId",
+      bookId:"bookId",
+      count : "수량",
+      },
+      ...],
+    delivery : {
+      address : "주소",
+      receiver : "이름",
+      contact : "번호"
+    },
+
+    totalPrice : 총금액
+
+  }
+  ```
+
+- Response Body :
+
+### 2. 주문 목록 조회
+
+- Method : GET
+
+- URL : /oders
+
+- HTTP status code : 성공 - 200
 
 - Request Body :
 
 - Response Body :
+
+  ```js
+  [
+    {
+      orderId: "주문번호",
+      odersDate: "주문일자",
+      delivery: {
+        address: "주소",
+        receiver: "이름",
+        contact: "전화번호",
+      },
+      bookTitle: "대표 책 제목",
+      totalPice: "결제 금액",
+      totalCount: "총 수량",
+    },
+  ];
+  ```
+
+### 3. 주문 상세 조회
+
+- Method : GET
+
+- URL : /orders/{orderId}
+
+- HTTP status code : 성공 - 200
+
+- Request Body :
+
+- Response Body :
+
+  ```js
+  [
+    {
+      bookId: "도서Id",
+      bookTitle: "도서 제목",
+      author: "작가명",
+      price: "가격",
+      count: "수량",
+    },
+
+    // ...
+  ];
+  ```
