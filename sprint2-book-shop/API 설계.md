@@ -98,15 +98,13 @@
 
 ### 1. 전체 도서 조회
 
-※ 이미지 경로, 8개씩 나눠 보여줘야하는것 나중에
-
 - Method : GET
 
-- URL : /books
+- URL : /books?limit={page 당 도서수}&currentPage={현재 페이지}
 
 - HTTP status code : 성공 - 200, 실패 - 404
 
-- Request Body :
+- Request : limt, 현 페이지
 
 - Response Body :
 
