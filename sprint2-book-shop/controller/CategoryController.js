@@ -1,15 +1,16 @@
-const conn = require("../mariadb.js");
+const database = require("../mariadb");
 const { StatusCodes } = require("http-status-codes");
-const dotenv = require("dotenv");
-dotenv.config();
 
-const allCategory = (req, res) => {
+const allCategory = async (req, res) => {
   const sql = "SELECT * FROM category";
-  conn.query(sql, (err, result) => {
-    if (err) return res.status(StatusCodes.BAD_REQUEST).json(err);
 
-    return res.status(200).json(result);
-  });
+  try {
+    const conn = await database.getDBConnection();
+    const [result, fields] = await conn.query(sql);
+    return res.status(StatusCodes.OK).json(result);
+  } catch (err) {
+    return res.status(StatusCodes.BAD_REQUEST).json(err);
+  }
 };
 
 module.exports = { allCategory };

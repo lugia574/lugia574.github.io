@@ -1,11 +1,11 @@
-const conn = require("../mariadb.js");
+const database = require("../mariadb");
 const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto"); // 암호화 모듈
 const dotenv = require("dotenv");
 dotenv.config();
 
-const join = (req, res) => {
+const join = async (req, res) => {
   const { email, password } = req.body;
 
   // 비밀번호 암호화
@@ -17,19 +17,23 @@ const join = (req, res) => {
   const sql = "INSERT INTO users (email, password, salt) VALUES (?, ?, ?)";
   const values = [email, hashPassword, salt];
 
-  conn.query(sql, values, (err, result) => {
-    if (err) return res.status(StatusCodes.BAD_REQUEST).json(err);
-
+  try {
+    const conn = await database.getDBConnection();
+    const [result, fields] = await conn.query(sql, values);
     return res.status(StatusCodes.CREATED).json(result);
-  });
+  } catch (err) {
+    return res.status(StatusCodes.BAD_REQUEST).json(err);
+  }
 };
 
-const login = (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
   const sql = "SELECT * FROM users WHERE email = ?";
 
-  conn.query(sql, email, (err, result) => {
-    if (err) return res.status(StatusCodes.BAD_REQUEST).end();
+  try {
+    const conn = await database.getDBConnection();
+    const [result, fields] = await conn.query(sql, email);
+
     let loginUser = result[0];
 
     const hashPassword = crypto
@@ -48,23 +52,28 @@ const login = (req, res) => {
       res.cookie("token", token, { httpOnly: true });
       return res.status(StatusCodes.OK).json("로그인");
     } else return res.status(StatusCodes.UNAUTHORIZED).end();
-  });
+  } catch (err) {
+    return res.status(StatusCodes.BAD_REQUEST).json(err);
+  }
 };
 
-const passwordResetRequest = (req, res) => {
+const passwordResetRequest = async (req, res) => {
   const { email } = req.body;
   const sql = "SELECT * FROM users WHERE email = ?";
 
-  conn.query(sql, email, (err, result) => {
-    if (err) return res.status(StatusCodes.BAD_REQUEST).end(err);
-    let user = result[0];
+  try {
+    const conn = await database.getDBConnection();
+    const [result, fields] = await conn.query(sql, email);
+    const user = result[0];
     if (user) {
       return res.status(StatusCodes.OK).json({ email: email });
     } else return res.status(StatusCodes.UNAUTHORIZED).end();
-  });
+  } catch (err) {
+    return res.status(StatusCodes.BAD_REQUEST).json(err);
+  }
 };
 
-const passwordReset = (req, res) => {
+const passwordReset = async (req, res) => {
   const { email, password } = req.body;
 
   const salt = crypto.randomBytes(10).toString("base64");
@@ -75,13 +84,15 @@ const passwordReset = (req, res) => {
   const sql = "UPDATE users SET password = ?, salt = ? WHERE email = ?";
   const values = [hashPassword, salt, email];
 
-  conn.query(sql, values, (err, result) => {
-    if (err) return res.status(StatusCodes.BAD_REQUEST).end(err);
-
+  try {
+    const conn = await database.getDBConnection();
+    const [result, fields] = await conn.query(sql, values);
     if (result.affectedRows == 0)
       return res.status(StatusCodes.BAD_REQUEST).end();
     else return res.status(StatusCodes.OK).end();
-  });
+  } catch (err) {
+    return res.status(StatusCodes.BAD_REQUEST).json(err);
+  }
 };
 
 module.exports = { join, login, passwordResetRequest, passwordReset };

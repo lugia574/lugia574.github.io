@@ -229,6 +229,10 @@ false 면 카테고리 전체
 
 - Request Body :
 
+  로그인 할때 받은 토큰 > header "Authorization"
+
+  페이로드 값을 읽어서 사용자 id 값 추출
+
 - Response Body :
 
 ### 2. 좋아요 취소
@@ -363,8 +367,10 @@ false 면 카테고리 전체
       receiver : "이름",
       contact : "번호"
     },
-
-    totalPrice : 총금액
+    totalQuantity : 총 수량,
+    totalPrice : 총금액,
+    userId,
+    firstBookTitle : 대표 도서 제목
 
   }
   ```
@@ -386,16 +392,14 @@ false 면 카테고리 전체
   ```js
   [
     {
-      orderId: "주문번호",
-      odersDate: "주문일자",
-      delivery: {
-        address: "주소",
-        receiver: "이름",
-        contact: "전화번호",
-      },
-      bookTitle: "대표 책 제목",
-      totalPice: "결제 금액",
-      totalCount: "총 수량",
+      id: "주문번호",
+      created_at: "주문일자",
+      address: "주소",
+      receiver: "이름",
+      contact: "전화번호",
+      book_title: "대표 책 제목",
+      total_quantity: "총 수량",
+      total_price: "결제 금액",
     },
   ];
   ```
@@ -415,11 +419,11 @@ false 면 카테고리 전체
   ```js
   [
     {
-      bookId: "도서Id",
-      bookTitle: "도서 제목",
+      book_id: "도서Id",
+      title: "도서 제목",
       author: "작가명",
       price: "가격",
-      count: "수량",
+      quantity: "수량",
     },
 
     // ...
