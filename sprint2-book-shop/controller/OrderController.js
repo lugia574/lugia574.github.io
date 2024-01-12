@@ -59,8 +59,6 @@ const insertOrderedBook = async (req, res, orderItems, order_id) => {
     values.push([order_id, item.book_id, item.quantity])
   );
 
-  console.log(orderItems, order_id);
-
   try {
     const conn = await database.getDBConnection();
     const results = await conn.query(sql, [values]);
@@ -71,7 +69,7 @@ const insertOrderedBook = async (req, res, orderItems, order_id) => {
 };
 
 const deleteCartItems = async (req, res) => {
-  const { item } = req.body;
+  const { items } = req.body;
   const sql = `DELETE FROM cartItems WHERE id IN (?)`;
 
   try {
