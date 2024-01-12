@@ -35,6 +35,7 @@ const login = async (req, res) => {
     const [result, fields] = await conn.query(sql, email);
 
     let loginUser = result[0];
+    console.log(result[0]);
 
     const hashPassword = crypto
       .pbkdf2Sync(password, loginUser.salt, 10000, 10, "sha512")
@@ -51,7 +52,7 @@ const login = async (req, res) => {
       // 쿠키에 담기
       res.cookie("token", token, { httpOnly: true });
       return res.status(StatusCodes.OK).json("로그인");
-    } else return res.status(StatusCodes.UNAUTHORIZED).end();
+    } else return res.status(StatusCodes.UNAUTHORIZED).end("아닌뎁쇼?");
   } catch (err) {
     return res.status(StatusCodes.BAD_REQUEST).json(err);
   }
@@ -89,7 +90,7 @@ const passwordReset = async (req, res) => {
     const [result, fields] = await conn.query(sql, values);
     if (result.affectedRows == 0)
       return res.status(StatusCodes.BAD_REQUEST).end();
-    else return res.status(StatusCodes.OK).end();
+    else return res.status(StatusCodes.OK).end("변경완료");
   } catch (err) {
     return res.status(StatusCodes.BAD_REQUEST).json(err);
   }

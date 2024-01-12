@@ -2,8 +2,10 @@
 const database = require("../mariadb");
 const { StatusCodes } = require("http-status-codes");
 
-const insertDelivery = async (values) => {
-  let sql = `INSERT INTO delivery (address, receiver, contact) 
+const insertDelivery = async (req, res) => {
+  const { delivery } = req.body;
+  const values = [delivery.address, delivery.receiver, delivery.contact];
+  const sql = `INSERT INTO delivery (address, receiver, contact) 
   VALUES (?, ?, ?)`;
 
   try {
@@ -15,7 +17,15 @@ const insertDelivery = async (values) => {
   }
 };
 
-const insertOrders = async (values) => {
+const insertOrders = async (req, res, delivery_id) => {
+  const [total_quantity, total_price, user_id, first_book_title] = req.body;
+  const values = [
+    first_book_title,
+    total_quantity,
+    total_price,
+    user_id,
+    delivery_id,
+  ];
   const sql = `INSERT INTO orders 
   (book_title, total_quantity, total_price, user_id, delivery_id) 
   VALUES(? , ?, ?, ?, ?)`;
@@ -29,8 +39,9 @@ const insertOrders = async (values) => {
   }
 };
 
-const selectCartItems = async (items) => {
-  sql = `SELECT book_id, quantity FROM cartItems WHERE id IN (?)`;
+const selectCartItems = async (req, res) => {
+  const { items } = req.body;
+  const sql = `SELECT book_id, quantity FROM cartItems WHERE id IN (?)`;
 
   try {
     const conn = await database.getDBConnection();
@@ -41,7 +52,7 @@ const selectCartItems = async (items) => {
   }
 };
 
-const insertOrderedBook = async (orderItems) => {
+const insertOrderedBook = async (req, res, orderItems, order_id) => {
   sql = `INSERT INTO orderedBook (order_id, book_id, quantity) VALUES ?`;
   values = [];
   orderItems.forEach((item) =>
@@ -57,7 +68,7 @@ const insertOrderedBook = async (orderItems) => {
   }
 };
 
-const deleteCartItems = async (items) => {
+const deleteCartItems = async (req, res, items) => {
   const sql = `DELETE FROM cartItems WHERE id IN (?)`;
 
   try {
@@ -70,36 +81,20 @@ const deleteCartItems = async (items) => {
 };
 
 const order = async (req, res) => {
-  const {
-    items,
-    delivery,
-    total_quantity,
-    total_price,
-    user_id,
-    first_book_title,
-  } = req.body;
-
   // delivery 삽입
-  let values = [delivery.address, delivery.receiver, delivery.contact];
-  let delivery_id = await insertDelivery(values);
+  const delivery_id = await insertDelivery(req, res);
 
   // orders 삽입
-  values = [
-    first_book_title,
-    total_quantity,
-    total_price,
-    user_id,
-    delivery_id,
-  ];
-  let order_id = await insertOrders(values);
+  const order_id = await insertOrders(req, res, delivery_id);
 
   // items 번호들로 해당 book_id, 양 조회
-  const orderItems = await selectCartItems(items);
+  const orderItems = await selectCartItems(req, res);
 
   // orderedBook 삽입
-  results = await insertOrderedBook(orderItems);
+  results = await insertOrderedBook(req, res, orderItems, order_id);
 
-  result = await deleteCartItems(items);
+  // 주문한 cartItems 삭제
+  result = await deleteCartItems(req, res, items);
 
   return res.status(StatusCodes.CREATED).json(results[0]);
 };
