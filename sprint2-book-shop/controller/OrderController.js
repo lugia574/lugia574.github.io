@@ -18,7 +18,7 @@ const insertDelivery = async (req, res) => {
 };
 
 const insertOrders = async (req, res, delivery_id) => {
-  const [total_quantity, total_price, user_id, first_book_title] = req.body;
+  const { total_quantity, total_price, user_id, first_book_title } = req.body;
   const values = [
     first_book_title,
     total_quantity,
@@ -59,6 +59,8 @@ const insertOrderedBook = async (req, res, orderItems, order_id) => {
     values.push([order_id, item.book_id, item.quantity])
   );
 
+  console.log(orderItems, order_id);
+
   try {
     const conn = await database.getDBConnection();
     const results = await conn.query(sql, [values]);
@@ -68,7 +70,8 @@ const insertOrderedBook = async (req, res, orderItems, order_id) => {
   }
 };
 
-const deleteCartItems = async (req, res, items) => {
+const deleteCartItems = async (req, res) => {
+  const { item } = req.body;
   const sql = `DELETE FROM cartItems WHERE id IN (?)`;
 
   try {
@@ -94,7 +97,7 @@ const order = async (req, res) => {
   results = await insertOrderedBook(req, res, orderItems, order_id);
 
   // 주문한 cartItems 삭제
-  result = await deleteCartItems(req, res, items);
+  result = await deleteCartItems(req, res);
 
   return res.status(StatusCodes.CREATED).json(results[0]);
 };
