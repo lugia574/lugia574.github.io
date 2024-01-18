@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { allCategory } = require("../controller/CategoryController");
+const CategoryController = require("../controllers/CategoryController");
 
 router.use(express.json());
 
-router.get("/", allCategory);
+router.get("/", CategoryController.all);
 
 module.exports = router;

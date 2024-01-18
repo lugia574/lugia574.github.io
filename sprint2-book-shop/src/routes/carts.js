@@ -4,7 +4,7 @@ const {
   addToCart,
   getCartItems,
   removeCartItem,
-} = require("../controller/CartsController");
+} = require("../controllers/CartsController");
 router.use(express.json());
 
 router.post("/", addToCart);

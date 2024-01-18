@@ -12,7 +12,6 @@ const likesRouter = require("./routes/likes.js");
 const ordersRouter = require("./routes/orders.js");
 const booksRouter = require("./routes/books.js");
 const categoryRouter = require("./routes/category.js");
-const testRouter = require("./routes/test.js");
 
 // app.set("view engine", "pug");
 // app.set("views", process.cwd() + "/lugia574.github.io/sprint2-book-shop/views");
@@ -23,7 +22,6 @@ app.use("/likes", likesRouter);
 app.use("/orders", ordersRouter);
 app.use("/books", booksRouter);
 app.use("/category", categoryRouter);
-app.use("/test", testRouter);
 
 app.get("/", (req, res) => {
   res.status(200).render("home");

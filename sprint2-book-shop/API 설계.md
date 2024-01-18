@@ -15,8 +15,7 @@
   ```js
   {
     email: "사용자가 입력한 이메일",
-    password: "사용자가 입력한 비밀번호",
-    password확인: "사용자가 재입력한 비밀번호"
+    password: "사용자가 입력한 비밀번호"
   }
   ```
 
@@ -45,13 +44,15 @@
   }
   ```
 
-- Response cookie : JWT Token
+- Response cookie : JWT Token (문자열)
 
 ### 3. 비밀번호 초기화 API
 
 #### 3-1. 초기화 요청
 
 해당 이메일이 db 에 있는 지 확인
+
+비번 까먹을때 (로그인 X)
 
 - Method : POST
 
@@ -109,19 +110,26 @@
 - Response Body :
 
   ```js
-  [
-    {
-      id: "도서 id",
-      title: "도서 이름",
-      img: "이미지 id",
-      summary: "요약 설명",
-      author: "도서 작가",
-      price: "가격",
-      likes: "좋아요수",
-      pubDate: "출간일",
-    },
-    // 여러개 .....
-  ];
+  {
+    books: [
+      {
+        id: "도서 id",
+        title: "도서 이름",
+        img: "이미지 id",
+        summary: "요약 설명",
+        author: "도서 작가",
+        price: "가격",
+        likes: "좋아요수",
+        pubDate: "출간일",
+      },
+      // 여러개 .....
+    ],
+
+    pagenation : {
+      currentPage : 현재 페이지,
+      totalCount : 총 도서 수
+    }
+  }
   ```
 
 ### 2. 개별도서 조회
@@ -134,6 +142,10 @@
 
 - HTTP status code : 성공 - 200
 
+- Request Headers : "Authorization" : 로그인할때 받은 JWT Token(문자열)
+
+  내가 좋아했는지 안했는지를 표시하기 위해서
+
 - Request Body :
 
 - Response Body :
@@ -143,14 +155,14 @@
     id: "도서 id",
     title: "도서 이름",
     img: "이미지 id",
-    category : "카테고리",
+    categoryName : "카테고리",
     fomat : "포맷",
     isbn : "isbn",
     summary: "요약 설명",
-    description : "상세설명",
+    detail : "상세설명",
     author: "도서 작가",
     pages : "쪽수",
-    index : "목차",
+    contents : "목차",
     price: "가격",
     likes: "좋아요 수",
     pubDate : "출간일"
@@ -169,7 +181,7 @@ false 면 카테고리 전체
 
 - Method : GET
 
-- URL : /books?categoryId={categoryId}&new={boolean}
+- URL : /books??limit={page 당 도서수}&currentPage={현재 페이지}&categoryId={categoryId}&new={boolean}
 
 - HTTP status code : 성공 - 200, 실패 - 404
 
@@ -178,19 +190,26 @@ false 면 카테고리 전체
 - Response Body :
 
   ```js
-  [
-    {
-      id: "도서 id",
-      title: "도서 이름",
-      img: "이미지 id",
-      summary: "요약 설명",
-      author: "도서 작가",
-      price: "가격",
-      likes: "좋아요수",
-      pubDate: "출간일",
-    },
-    // 여러개 .....
-  ];
+  {
+    books: [
+      {
+        id: "도서 id",
+        title: "도서 이름",
+        img: "이미지 id",
+        summary: "요약 설명",
+        author: "도서 작가",
+        price: "가격",
+        likes: "좋아요수",
+        pubDate: "출간일",
+      },
+      // 여러개 .....
+    ],
+
+    pagenation : {
+      currentPage : 현재 페이지,
+      totalCount : 총 도서 수
+    }
+  }
   ```
 
 ### 카테고리 전체 조회
@@ -208,8 +227,8 @@ false 면 카테고리 전체
   ```js
   [
     {
-      id: "id",
-      name: "name",
+      categoryId: "id",
+      categoryName: "name",
     },
     ...
   ];
@@ -227,13 +246,15 @@ false 면 카테고리 전체
 
 - HTTP status code : 성공 - 200
 
+- Request Header :
+
+  Authorization : 로그인할때 받은 JWT Token (문자열)
+
 - Request Body :
 
-  로그인 할때 받은 토큰 > header "Authorization"
-
-  페이로드 값을 읽어서 사용자 id 값 추출
-
 - Response Body :
+
+  프론트단에서 해주면 좋을듯
 
 ### 2. 좋아요 취소
 
@@ -242,6 +263,10 @@ false 면 카테고리 전체
 - URL : /likes/{:bookId}
 
 - HTTP status code : 성공 - 200
+
+- Request Header :
+
+  Authorization : 로그인할때 받은 JWT Token (문자열)
 
 - Request Body :
 
@@ -257,18 +282,22 @@ false 면 카테고리 전체
 
 - HTTP status code : 성공 - 201
 
+- Request Header :
+
+  Authorization : 로그인할때 받은 JWT Token (문자열)
+
 - Request Body :
 
   ```js
   {
     bookId : "도서 id",
-    count : 도서 수량
+    quantity : 도서 수량
   }
   ```
 
 - Response Body :
 
-### 2. 장바구니 조회
+### 2. 내 장바구니 조회/ 선택한 장바구니 상품 목록 조회
 
 - Method : GET
 
@@ -276,19 +305,30 @@ false 면 카테고리 전체
 
 - HTTP status code : 성공 - 200
 
+- Request Headers : "Authorization" : 로그인할때 받은 JWT Token(문자열)
+
 - Request Body :
+
+  ```js
+  //  내 장바구니 조회 : Request Body 없음
+
+  // 선택한 장바구니 상품목록 조회
+  {
+    selected : [cartItemId, ...]
+  }
+  ```
 
 - Response Body :
 
   ```js
   [
     {
-      cartltemId : "장바구니 도서 id",
+      id : "장바구니 도서 id",
       bookId: "도서 id",
       title: "도서 제목",
       summary: "도서 요약",
-      price: "도서 가격",
-      count : 도서 수량
+      quantity : 도서 수량,
+      price: "도서 가격"
     },
 
     // ..... 여러개
@@ -350,6 +390,8 @@ false 면 카테고리 전체
 
 - URL : /orders
 
+- Request Headers : "Authorization" : 로그인할때 받은 JWT Token(문자열)
+
 - HTTP status code : 성공 - 200
 
 - Request Body :
@@ -369,9 +411,7 @@ false 면 카테고리 전체
     },
     totalQuantity : 총 수량,
     totalPrice : 총금액,
-    userId,
     firstBookTitle : 대표 도서 제목
-
   }
   ```
 
@@ -385,6 +425,8 @@ false 면 카테고리 전체
 
 - HTTP status code : 성공 - 200
 
+- Request Headers : "Authorization" : 로그인할때 받은 JWT Token(문자열)
+
 - Request Body :
 
 - Response Body :
@@ -393,13 +435,13 @@ false 면 카테고리 전체
   [
     {
       id: "주문번호",
-      created_at: "주문일자",
+      createdAt: "주문일자",
       address: "주소",
       receiver: "이름",
       contact: "전화번호",
-      book_title: "대표 책 제목",
-      total_quantity: "총 수량",
-      total_price: "결제 금액",
+      bookTitle: "대표 책 제목",
+      totalQuantity: "총 수량",
+      totalPrice: "결제 금액",
     },
   ];
   ```
@@ -412,6 +454,8 @@ false 면 카테고리 전체
 
 - HTTP status code : 성공 - 200
 
+- Request Headers : "Authorization" : 로그인할때 받은 JWT Token(문자열)
+
 - Request Body :
 
 - Response Body :
@@ -419,7 +463,7 @@ false 면 카테고리 전체
   ```js
   [
     {
-      book_id: "도서Id",
+      bookId: "도서Id",
       title: "도서 제목",
       author: "작가명",
       price: "가격",
