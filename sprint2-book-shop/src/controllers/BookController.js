@@ -9,7 +9,7 @@ currentPage : 현재 페이지
 offset = limit * (currentPage - 1) : 시작위치
 */
 class BookController {
-  async select(req, res) {
+  async get(req, res) {
     const allBooksRes = {};
     const { category_id, news, limit, currentPage } = req.query;
 

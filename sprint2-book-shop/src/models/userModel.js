@@ -67,4 +67,4 @@ class UserModel {
   }
 }
 
-module.exports = UserModel;
+module.exports = new UserModel();

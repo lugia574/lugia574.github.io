@@ -79,4 +79,4 @@ class BookModel {
   }
 }
 
-module.exports = BookModel;
+module.exports = new BookModel();

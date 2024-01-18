@@ -1,14 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const {
-  addToCart,
-  getCartItems,
-  removeCartItem,
-} = require("../controllers/CartsController");
+const CartsController = require("../controllers/CartsController");
+const { validBookId, validate } = require("../utils/validation");
 router.use(express.json());
 
-router.post("/", addToCart);
-router.get("/", getCartItems);
-router.delete("/:id", removeCartItem);
+router.post("/", [validBookId, validQuantity, validate], CartsController.add);
+router.get("/", CartsController.get);
+router.delete("/:id", [validId, validate], CartsController.remove);
 
 module.exports = router;

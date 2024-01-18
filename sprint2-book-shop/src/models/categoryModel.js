@@ -14,4 +14,4 @@ class CategoryModel {
   }
 }
 
-module.exports = CategoryModel;
+module.exports = new CategoryModel();
