@@ -6,6 +6,40 @@
 
 [깃헙 배포 페이지 링크](https://lugia574.github.io/)
 
+## 패키지 구조
+
+```
+/project-root
+|-- /src
+|   |-- /controllers
+|   |   |-- bookController.js
+|   |   |-- userController.js
+|   |   |-- orderController.js
+|   |   |-- ...
+|   |-- /models
+|   |   |-- bookModel.js
+|   |   |-- userModel.js
+|   |   |-- orderModel.js
+|   |   |-- ...
+|   |-- /routes
+|   |   |-- books.js
+|   |   |-- users.js
+|   |   |-- orders.js
+|   |   |-- ...
+|   |-- /utils
+|   |   |-- auth.js
+|   |   |-- encryption.js
+|   |   |-- response.js
+|   |   |-- validation.js
+|   |-- /views
+|   |-- server.js
+|-- /config
+|   |-- mariadb.js
+|-- /public
+|-- package.json
+|-- README.md
+```
+
 ## 이제까지 한거
 
 - 패키지 구조 개편
