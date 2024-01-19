@@ -21,10 +21,15 @@ const unauthorizedResponse = (res, message) => {
   return res.status(StatusCodes.UNAUTHORIZED).end(message);
 };
 
+const serverErrorResponse = (res, message) => {
+  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end(message);
+};
+
 module.exports = {
   successResponse,
   createdResponse,
   badRequestResponse,
   notFoundResponse,
   unauthorizedResponse,
+  serverErrorResponse,
 };

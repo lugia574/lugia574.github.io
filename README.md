@@ -18,8 +18,14 @@
 
 - mvc 로 완전히 분리
 
+- 유효성검사
+
 ## ToDo List
 
 - 예외처리
 
-- 유효성검사
+## 할려다가 안한것
+
+- 싱글톤 패턴 적용하기
+
+  [Node.js에서 singleton을 구현하려하지 마세요](https://kyungyeon.dev/posts/77)

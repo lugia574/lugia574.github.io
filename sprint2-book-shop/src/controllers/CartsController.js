@@ -1,7 +1,5 @@
-const database = require("../../config/mariadb");
 const CartsModel = require("../models/CartsModel");
-const ensureAuthorization = require("../utils/auth");
-const { StatusCodes } = require("http-status-codes");
+
 const {
   createdResponse,
   badRequestResponse,

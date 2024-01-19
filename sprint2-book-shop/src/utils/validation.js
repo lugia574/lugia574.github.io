@@ -1,10 +1,11 @@
 // 선언 잋 미들웨어, 변수
 const { query } = require("express");
 const { body, param, validationResult } = require("express-validator");
+const { badRequestResponse } = require("./response");
 
 const validate = (req, res) => {
   const err = validationResult(req);
-  if (!err.isEmpty()) return res.status(400).json(err.array());
+  if (!err.isEmpty()) return badRequestResponse(res, err.array());
   next();
 };
 
@@ -12,6 +13,7 @@ const validEmail = body("email")
   .notEmpty()
   .isEmail()
   .withMessage("이메일 입력해주세요");
+
 const validPassword = body("password")
   .notEmpty()
   .isString()

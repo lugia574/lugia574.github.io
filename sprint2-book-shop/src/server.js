@@ -24,7 +24,7 @@ app.use("/books", booksRouter);
 app.use("/category", categoryRouter);
 
 app.get("/", (req, res) => {
-  res.status(200).render("home");
+  res.status(200).render("index");
 });
 
 app.listen(port, () => {

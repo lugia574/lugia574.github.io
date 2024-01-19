@@ -1,6 +1,5 @@
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
 const UserModel = require("../models/userModel");
+const { tokenSign, tokenRefresh } = require("../utils/auth");
 const {
   successResponse,
   unauthorizedResponse,
@@ -8,7 +7,6 @@ const {
   notFoundResponse,
   createdResponse,
 } = require("../utils/response");
-dotenv.config();
 
 class UserController {
   async join(req, res) {
@@ -29,17 +27,11 @@ class UserController {
     try {
       const loginUser = await UserModel.login(email, password);
       if (loginUser) {
-        const token = jwt.sign(
-          {
-            id: loginUser.id,
-            email: loginUser.email,
-          },
-          process.env.PRIVATE_KEY,
-          { expiresIn: "6h", issuer: "lcw" }
-        );
-
+        const token = tokenSign(loginUser.id, loginUser.email);
+        const refreshToken = tokenRefresh();
         // 쿠키에 담기
         res.cookie("token", token, { httpOnly: true });
+        res.cookie("refreshToken", refreshToken, { httpOnly: true });
         return successResponse(res, "로그인");
       } else return unauthorizedResponse(res, "입력 정보가 맞지 않습니다.");
     } catch (err) {
