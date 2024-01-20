@@ -1,9 +1,7 @@
 const database = require("../../config/mariadb");
-const ensureAuthorization = require("../utils/auth");
 
 class OrderModel {
-  async insertDelivery(req, res) {
-    const { delivery } = req.body;
+  async insertDelivery(delivery) {
     const values = [delivery.address, delivery.receiver, delivery.contact];
     const sql = `INSERT INTO delivery (address, receiver, contact)
             VALUES (?, ?, ?)`;
@@ -17,16 +15,7 @@ class OrderModel {
     }
   }
 
-  async insertOrders(req, res, delivery_id, authorization) {
-    const { total_quantity, total_price, first_book_title } = req.body;
-
-    const values = [
-      first_book_title,
-      total_quantity,
-      total_price,
-      authorization.id,
-      delivery_id,
-    ];
+  async insertOrders(values) {
     const sql = `INSERT INTO orders
         (book_title, total_quantity, total_price, user_id, delivery_id)
         VALUES(? , ?, ?, ?, ?)`;
@@ -40,8 +29,7 @@ class OrderModel {
     }
   }
 
-  async selectCartItems(req, res) {
-    const { items } = req.body;
+  async getCartItems(items) {
     const sql = `SELECT book_id, quantity FROM cartItems WHERE id IN (?)`;
 
     try {
@@ -53,11 +41,11 @@ class OrderModel {
     }
   }
 
-  async insertOrderedBook(req, res, orderItems, order_id) {
+  async insertOrderedBook(orderItems, orderId) {
     sql = `INSERT INTO orderedBook (order_id, book_id, quantity) VALUES ?`;
     values = [];
     orderItems.forEach((item) =>
-      values.push([order_id, item.book_id, item.quantity])
+      values.push([orderId, item.book_id, item.quantity])
     );
 
     try {
@@ -69,8 +57,7 @@ class OrderModel {
     }
   }
 
-  async deleteCartItems(req, res) {
-    const { items } = req.body;
+  async deleteCartItems(items) {
     const sql = `DELETE FROM cartItems WHERE id IN (?)`;
 
     try {
@@ -82,41 +69,31 @@ class OrderModel {
     }
   }
 
-  async get(req, res) {
+  async get(userId) {
     const sql = `SELECT orders.id, created_at, delivery.address, delivery.receiver, delivery.contact,
                     book_title, total_quantity, total_price
                     FROM orders LEFT JOIN delivery
                     ON orders.delivery_id = delivery.id
-                    `;
+                    WHERE user_id = ?`;
 
     try {
-      const authorization = await ensureAuthorization(req, res);
-      if (!authorization) {
-        throw new ReferenceError("jwt must be provided");
-      }
       const conn = await database.getDBConnection();
-      const [rows, fields] = await conn.query(sql);
+      const [rows, fields] = await conn.query(sql, userId);
       return rows;
     } catch (err) {
       throw err;
     }
   }
 
-  async Detail(req, res, orderId) {
-    const order_id = req.params.id;
-
+  async detail(orderId) {
     const sql = `SELECT book_id, title, author, price, quantity
                     FROM orderedBook LEFT JOIN books
                     ON orderedBook.book_id = books.id
                     WHERE order_id = ?`;
 
     try {
-      const authorization = await ensureAuthorization(req, res);
-      if (!authorization) {
-        throw new ReferenceError("jwt must be provided");
-      }
       const conn = await database.getDBConnection();
-      const [rows, fields] = await conn.query(sql, order_id);
+      const [rows, fields] = await conn.query(sql, orderId);
       return rows;
     } catch (err) {
       throw err;

@@ -47,7 +47,7 @@ class BookModel {
 
   static async getBookDetail(req, res, bookId) {
     // 로그인 상태가 아니면 liked 빼고 보내주고
-    const authorization = await ensureAuthorization(req, res);
+    const authorization = ensureAuthorization(req);
 
     let sql = "";
     const values = [];
@@ -73,7 +73,6 @@ class BookModel {
           return e;
         });
     } catch (err) {
-      console.log(err);
       throw err;
     }
   }

@@ -25,17 +25,20 @@ const validId = param("id").notEmpty().withMessage("잘못된 정도 입니다."
 // book
 const validLimit = check("limit")
   .notEmpty()
+  .isInt()
   .withMessage("페이지내 도서 갯수를 지정해주세요.");
 
 const validCurrentPage = check("currentPage")
   .notEmpty()
+  .isInt()
   .withMessage("페이지를 지정해주세요");
 
 const validNews = check("news")
   .notEmpty()
+  .isBoolean()
   .withMessage("신간보기 설정 해주세요");
 
-const validCategoryId = check("category_id").notEmpty().notEmpty();
+const validCategoryId = check("category_id").isInt()().notEmpty();
 
 // cart
 const validBookId = body("book_id")

@@ -3,7 +3,6 @@ class CartsModel {
     const sql = `INSERT INTO cartItems (book_id, quantity, user_id) VALUES(?, ?, ?)`;
 
     try {
-      const authorization = await ensureAuthorization(req, res);
       const values = [bookId, quantity, authorization.id];
       const conn = await database.getDBConnection();
       const [result, fields] = await conn.query(sql, values);
@@ -13,10 +12,9 @@ class CartsModel {
     }
   }
 
-  async get(req, res, selected) {
+  async get(req, res, selected, userId) {
     try {
-      const authorization = await ensureAuthorization(req, res);
-      const values = [authorization.id];
+      const values = [userId];
       let sql = `SELECT cartItems.id, cartItems.book_id, title, summary, cartItems.quantity, price  
     FROM cartItems LEFT JOIN books ON books.id = cartItems.book_id WHERE user_id = ?`;
       if (selected) {
@@ -37,15 +35,11 @@ class CartsModel {
     const sql = `DELETE FROM cartItems WHERE id = ?`;
 
     try {
-      const authorization = await ensureAuthorization(req, res);
-      if (!authorization) {
-        throw new ReferenceError("jwt must be provided");
-      }
       const conn = await database.getDBConnection();
       const [result, fields] = await conn.query(sql, cartItemId);
-      return res.status(StatusCodes.OK).json(result);
+      return result;
     } catch (err) {
-      return res.status(StatusCodes.BAD_REQUEST).json(err);
+      return err;
     }
   }
 }

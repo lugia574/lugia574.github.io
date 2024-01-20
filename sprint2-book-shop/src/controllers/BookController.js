@@ -1,5 +1,5 @@
 const BookModel = require("../models/bookModel");
-const { badRequestResponse, successResponse } = require("../utils/response");
+const { successResponse, badRequestResponse } = require("../utils/response");
 
 /* 변수 설명
 category_id : 도서카테고리
@@ -47,7 +47,6 @@ class BookController {
       if (result) return successResponse(res, result);
       else return notFoundResponse(res, "도서 정보가 없습니다.");
     } catch (err) {
-      console.log(err);
       return badRequestResponse(res, err);
     }
   }

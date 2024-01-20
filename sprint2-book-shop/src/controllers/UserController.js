@@ -1,5 +1,6 @@
 const UserModel = require("../models/userModel");
 const { tokenSign, tokenRefresh } = require("../utils/auth");
+const errorHandler = require("../utils/errors");
 const {
   successResponse,
   unauthorizedResponse,
@@ -11,14 +12,14 @@ const {
 class UserController {
   async join(req, res) {
     const { email, password } = req.body;
-    console.log("가긴 가냐?");
+    // console.log("가긴 가냐?");
 
     try {
       const result = await UserModel.create(email, password);
       if (result.affectedRows > 0) createdResponse(res, result);
       else return notFoundResponse(res, "계정 생성 실패");
     } catch (err) {
-      return notFoundResponse(res, err);
+      return errorHandler(res, err);
     }
   }
 
@@ -36,8 +37,7 @@ class UserController {
         return successResponse(res, "로그인");
       } else return unauthorizedResponse(res, "입력 정보가 맞지 않습니다.");
     } catch (err) {
-      console.log(err);
-      return badRequestResponse(res, err.message);
+      return badRequestResponse(res, err);
     }
   }
 

@@ -6,7 +6,7 @@ class CategoryController {
       const result = await CategoryModel.all();
       return successResponse(res, result);
     } catch (err) {
-      return badRequestResponse(res, err);
+      return errorHandler(res, err);
     }
   }
 }

@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const ensureAuthorization = (req, res, next) => {
+const ensureAuthorization = (req) => {
   try {
     const receivedJWT = req.headers["authorization"];
     // console.log(receivedJWT);
