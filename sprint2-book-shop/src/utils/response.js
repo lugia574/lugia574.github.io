@@ -9,8 +9,7 @@ const createdResponse = (res, data) => {
 };
 
 const badRequestResponse = (res, message) => {
-  console.log(message);
-  return res.status(StatusCodes.BAD_REQUEST).json(message.name);
+  return res.status(StatusCodes.BAD_REQUEST).json(message);
 };
 
 const notFoundResponse = (res, message) => {

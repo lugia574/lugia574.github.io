@@ -11,6 +11,7 @@ const {
 class UserController {
   async join(req, res) {
     const { email, password } = req.body;
+    console.log("가긴 가냐?");
 
     try {
       const result = await UserModel.create(email, password);
@@ -36,7 +37,7 @@ class UserController {
       } else return unauthorizedResponse(res, "입력 정보가 맞지 않습니다.");
     } catch (err) {
       console.log(err);
-      return badRequestResponse(res, err);
+      return badRequestResponse(res, err.message);
     }
   }
 

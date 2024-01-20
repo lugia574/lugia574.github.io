@@ -34,7 +34,6 @@ class CartsModel {
   }
 
   async remove(req, res, cartItemId) {
-    const cartItemId = req.params.id;
     const sql = `DELETE FROM cartItems WHERE id = ?`;
 
     try {

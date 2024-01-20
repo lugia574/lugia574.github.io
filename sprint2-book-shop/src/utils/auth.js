@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const { unauthorizedResponse, badRequestResponse } = require("./response");
 dotenv.config();
 
 const ensureAuthorization = (req, res, next) => {

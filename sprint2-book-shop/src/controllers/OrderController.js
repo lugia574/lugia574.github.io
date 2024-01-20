@@ -11,7 +11,7 @@ const {
 class OrderController {
   async order(req, res) {
     try {
-      const authorization = await ensureAuthorization(req, res);
+      const authorization = ensureAuthorization(req, res);
 
       if (authorization) {
         const delivery_id = await OrderModel.insertDelivery(req, res);

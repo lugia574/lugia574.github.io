@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const CartsController = require("../controllers/CartsController");
-const { validBookId, validate } = require("../utils/validation");
+const {
+  validBookId,
+  validate,
+  validQuantity,
+  validId,
+} = require("../utils/validation");
 router.use(express.json());
 
 router.post("/", [validBookId, validQuantity, validate], CartsController.add);

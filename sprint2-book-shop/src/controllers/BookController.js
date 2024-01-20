@@ -11,11 +11,12 @@ offset = limit * (currentPage - 1) : 시작위치
 class BookController {
   async get(req, res) {
     const allBooksRes = {};
-    const { category_id, news, limit, currentPage } = req.query;
+    const { news, limit, currentPage } = req.query;
+    const categoryId = req.query.category_id;
 
     try {
       const books = await BookModel.getBooks(
-        category_id,
+        categoryId,
         news,
         limit,
         currentPage

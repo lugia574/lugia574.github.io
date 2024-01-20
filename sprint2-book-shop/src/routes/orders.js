@@ -12,13 +12,8 @@ const {
   validTotalQunatity,
   validTotalPrice,
   validUserId,
+  validId,
 } = require("../utils/validation");
-
-router.use(express.json());
-
-router.post("/", validateOrder, OrderController.order);
-router.get("/", OrderController.get);
-router.get("/:id", [validId, validate], OrderController.Detail);
 
 const validateOrder = [
   validItem,
@@ -32,5 +27,11 @@ const validateOrder = [
   validUserId,
   validate,
 ];
+
+router.use(express.json());
+
+router.post("/", validateOrder, OrderController.order);
+router.get("/", OrderController.get);
+router.get("/:id", [validId, validate], OrderController.Detail);
 
 module.exports = router;

@@ -1,11 +1,12 @@
 // 선언 잋 미들웨어, 변수
 const { query } = require("express");
-const { body, param, validationResult } = require("express-validator");
+const { body, param, validationResult, check } = require("express-validator");
 const { badRequestResponse } = require("./response");
 
 const validate = (req, res) => {
   const err = validationResult(req);
-  if (!err.isEmpty()) return badRequestResponse(res, err.array());
+  const { errors } = err;
+  if (!err.isEmpty()) return badRequestResponse(res, errors);
   next();
 };
 
@@ -22,15 +23,19 @@ const validPassword = body("password")
 const validId = param("id").notEmpty().withMessage("잘못된 정도 입니다.");
 
 // book
-const validLimit = query("limit")
-  .isInt({ min: 1, max: 10 })
+const validLimit = check("limit")
+  .notEmpty()
   .withMessage("페이지내 도서 갯수를 지정해주세요.");
 
-const validCurrentPage = query("currentPage")
-  .isInt({ min: 1 })
+const validCurrentPage = check("currentPage")
+  .notEmpty()
   .withMessage("페이지를 지정해주세요");
 
-const validCategoryId = query("category_id").notEmpty().isInt();
+const validNews = check("news")
+  .notEmpty()
+  .withMessage("신간보기 설정 해주세요");
+
+const validCategoryId = check("category_id").notEmpty().notEmpty();
 
 // cart
 const validBookId = body("book_id")
@@ -87,4 +92,5 @@ module.exports = {
   validTotalQunatity,
   validTotalPrice,
   validUserId,
+  validNews,
 };
