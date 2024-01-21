@@ -13,8 +13,11 @@ class CartsController {
     const { book_id, quantity } = req.body;
 
     try {
-      const isToken = isTokens(req, res);
+      const isToken = await isTokens(req);
       if (isToken) {
+        if (typeof isToken === "string") {
+          res.cookie("accessToken", isToken);
+        }
         const result = await CartsModel.add(req, res, book_id, quantity);
         return createdResponse(res, result);
       } else return unauthorizedResponse(res, "권한이 없습니다.");
@@ -28,8 +31,11 @@ class CartsController {
     const { selected } = req.body;
 
     try {
-      const isToken = isTokens(req, res);
+      const isToken = await isTokens(req);
       if (isToken) {
+        if (typeof isToken === "string") {
+          res.cookie("accessToken", isToken);
+        }
         const result = await CartsModel.get(
           req,
           res,
@@ -48,8 +54,11 @@ class CartsController {
     const cartItemId = req.params.id;
 
     try {
-      const isToken = isTokens(req, res, next);
+      const isToken = await isTokens(req);
       if (isToken) {
+        if (typeof isToken === "string") {
+          res.cookie("accessToken", isToken);
+        }
         const result = await CartsModel.remove(req, res, cartItemId);
         return successResponse(res, result);
       } else return unauthorizedResponse(res, "권한이 없습니다.");

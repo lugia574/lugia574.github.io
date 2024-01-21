@@ -6,7 +6,36 @@ const {
 
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const Database = require("../../config/mariadb");
 dotenv.config();
+
+const isTokens = async (req) => {
+  const { accessToken } = req.cookies;
+  // 아예 로그인 안한경우
+  if (accessToken === undefined) return false;
+
+  try {
+    const isAccessToken = verifyToken(accessToken);
+    return true;
+  } catch (err) {
+    if (err instanceof jwt.TokenExpiredError) {
+      const decodedToken = jwt.decode(accessToken);
+      // DB 들어가서 찾기
+      const result = await verifyRefreshToken(decodedToken.id);
+      const refreshToken = result.refresh_token;
+      const isRefresh = verifyToken(refreshToken);
+      if (isRefresh === undefined) {
+        return false;
+      } else {
+        const newAccessToken = signAccessToken(
+          decodedToken.id,
+          decodedToken.email
+        );
+        return newAccessToken;
+      }
+    } else throw err;
+  }
+};
 
 const signAccessToken = (id, email) => {
   return jwt.sign(
@@ -15,43 +44,34 @@ const signAccessToken = (id, email) => {
       email: email,
     },
     process.env.PRIVATE_KEY,
-    { expiresIn: "2h", issuer: "lcw" }
+    { expiresIn: "1h", issuer: "lcw" }
   );
 };
 
-const signRefreshToken = (id, email) => {
-  return jwt.sign(
-    {
-      id: id,
-      email: email,
-    },
-    process.env.PRIVATE_KEY,
-    {
-      expiresIn: "14d",
-      issuer: "lcw",
-    }
-  );
-};
-const isTokens = (req, res) => {
-  // 아예 로그인 안한경우
-  if (req.cookies.access === undefined) return false;
+const signRefreshToken = async (id) => {
+  const refreshToken = jwt.sign({}, process.env.PRIVATE_KEY, {
+    expiresIn: "14d",
+    issuer: "lcw",
+  });
+
+  const sql = "UPDATE users SET refresh_token = ? WHERE id = ?";
+  const values = [refreshToken, id];
+
   try {
-    const accessToken = verifyToken(req.cookies.access);
-    const refreshToken = verifyToken(req.cookies.refresh);
+    const conn = await Database.getDBConnection();
+    const [result, fields] = await conn.query(sql, values);
+    return result.affectedRows;
+  } catch (err) {
+    throw err;
+  }
+};
 
-    if (accessToken === null) {
-      if (refreshToken === undefined) {
-        // case1: access 만료, refresh 만료
-        return false;
-      } else {
-        const newAccessToken = signAccessToken(
-          refreshToken.id,
-          refreshToken.email
-        );
-        res.cookie("access", newAccessToken);
-        return true;
-      }
-    } else return true;
+const verifyRefreshToken = async (userId) => {
+  const sql = "SELECT refresh_token FROM users WHERE id = ?";
+  try {
+    const conn = await Database.getDBConnection();
+    const [results, fields] = await conn.query(sql, userId);
+    return results[0];
   } catch (err) {
     throw err;
   }
@@ -63,7 +83,6 @@ const verifyToken = (token) => {
 
 const tokenErrorHandler = (res, err) => {
   if (err instanceof jwt.TokenExpiredError)
-    // 리프레시 토큰을 봐서 그걸 갱신해주는 코드 ㄱㄱ
     return unauthorizedResponse(
       res,
       "로그인이 만료되었습니다. 다시 로그인하세요"

@@ -11,8 +11,12 @@ class OrderController {
     const { total_quantity, total_price, first_book_title } = req.body;
 
     try {
-      const isToken = isTokens(req, res);
+      const isToken = await isTokens(req);
+
       if (isToken) {
+        if (typeof isToken === "string") {
+          res.cookie("accessToken", isToken);
+        }
         const deliveryId = await OrderModel.insertDelivery(req.delivery);
 
         const values = [
@@ -28,7 +32,10 @@ class OrderController {
         const result = await OrderModel.deleteCartItems(req.body.items);
 
         return createdResponse(res, results[0]);
-      } else unauthorizedResponse(res, "권한이 없습니다.");
+      } else {
+        console.log("걍 지나간거임?");
+        unauthorizedResponse(res, new Error("권한이 없습니다."));
+      }
     } catch (err) {
       tokenErrorHandler(res, err);
     }
@@ -36,8 +43,12 @@ class OrderController {
 
   async get(req, res) {
     try {
-      const isToken = isTokens(req, res);
+      const isToken = await isTokens(req);
+
       if (isToken) {
+        if (typeof isToken === "string") {
+          res.cookie("accessToken", isToken);
+        }
         const result = await OrderModel.get(req, res, authorization.id);
         return res.status(StatusCodes.OK).json(result);
       } else return unauthorizedResponse(res, "권한이 없습니다.");
@@ -48,8 +59,11 @@ class OrderController {
 
   async detail(req, res) {
     try {
-      const isToken = isTokens(req, res);
+      const isToken = await isTokens(req);
       if (isToken) {
+        if (typeof isToken === "string") {
+          res.cookie("accessToken", isToken);
+        }
         const result = await OrderModel.detail(req.params.id);
         return successResponse(res, result);
       } else return unauthorizedResponse(res, "권한이 없습니다.");
