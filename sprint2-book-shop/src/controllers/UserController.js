@@ -27,7 +27,7 @@ class UserController {
       const loginUser = await userModel.login(email, password);
       if (loginUser) {
         const accessToken = signAccessToken(loginUser.id, loginUser.email);
-        const refreshToken = signRefreshToken();
+        const refreshToken = signRefreshToken(loginUser.id, loginUser.email);
         // 쿠키에 담기
         res.cookie("accessToken", accessToken);
         res.cookie("refreshToken", refreshToken);

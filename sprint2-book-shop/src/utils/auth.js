@@ -19,7 +19,7 @@ const signAccessToken = (id, email) => {
   );
 };
 
-const signRefreshToken = () => {
+const signRefreshToken = (id, email) => {
   return jwt.sign(
     {
       id: id,
@@ -49,19 +49,9 @@ const isTokens = (req, res) => {
           refreshToken.email
         );
         res.cookie("access", newAccessToken);
-        req.cookies.access = newAccessToken;
         return true;
       }
-    } else {
-      if (refreshToken === undefined) {
-        // case3: access 유효, refresh 만료
-        const newRefreshToken = signRefreshToken();
-        res.cookie("refresh", newRefreshToken);
-        req.cookies.refresh = newRefreshToken;
-        return true;
-      }
-    }
-    return true;
+    } else return true;
   } catch (err) {
     throw err;
   }
