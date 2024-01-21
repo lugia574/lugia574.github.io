@@ -1,10 +1,10 @@
 const CartsModel = require("../models/CartsModel");
-const { ensureAuthorization } = require("../utils/auth");
+const { tokenErrorHandler, isTokens } = require("../utils/auth");
 
 const {
   createdResponse,
-  badRequestResponse,
   successResponse,
+  unauthorizedResponse,
 } = require("../utils/response");
 
 // 장바구니 추가
@@ -13,13 +13,13 @@ class CartsController {
     const { book_id, quantity } = req.body;
 
     try {
-      const authorization = ensureAuthorization(req, res);
-      if (authorization) {
+      const isToken = isTokens(req, res);
+      if (isToken) {
         const result = await CartsModel.add(req, res, book_id, quantity);
         return createdResponse(res, result);
       } else return unauthorizedResponse(res, "권한이 없습니다.");
     } catch (err) {
-      return errorHandler(res, err);
+      return tokenErrorHandler(res, err);
     }
   }
 
@@ -28,8 +28,8 @@ class CartsController {
     const { selected } = req.body;
 
     try {
-      const authorization = ensureAuthorization(req, res);
-      if (authorization) {
+      const isToken = isTokens(req, res);
+      if (isToken) {
         const result = await CartsModel.get(
           req,
           res,
@@ -39,7 +39,7 @@ class CartsController {
         return successResponse(res, result);
       } else return unauthorizedResponse(res, "권한이 없습니다.");
     } catch (err) {
-      return errorHandler(res, err);
+      return tokenErrorHandler(res, err);
     }
   }
 
@@ -48,13 +48,13 @@ class CartsController {
     const cartItemId = req.params.id;
 
     try {
-      const authorization = ensureAuthorization(req);
-      if (authorization) {
+      const isToken = isTokens(req, res, next);
+      if (isToken) {
         const result = await CartsModel.remove(req, res, cartItemId);
         return successResponse(res, result);
       } else return unauthorizedResponse(res, "권한이 없습니다.");
     } catch (err) {
-      return errorHandler(res, err);
+      return tokenErrorHandler(res, err);
     }
   }
 }

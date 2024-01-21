@@ -32,6 +32,6 @@ router.use(express.json());
 
 router.post("/", validateOrder, OrderController.order);
 router.get("/", OrderController.get);
-router.get("/:id", [validId, validate], OrderController.Detail);
+router.get("/:id", [validId, validate], OrderController.detail);
 
 module.exports = router;

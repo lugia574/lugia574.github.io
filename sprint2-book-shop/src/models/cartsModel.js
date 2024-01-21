@@ -39,7 +39,7 @@ class CartsModel {
       const [result, fields] = await conn.query(sql, cartItemId);
       return result;
     } catch (err) {
-      return err;
+      throw err;
     }
   }
 }

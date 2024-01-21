@@ -1,9 +1,7 @@
 const OrderModel = require("../models/orderModel");
-const { ensureAuthorization } = require("../utils/auth");
-const errorHandler = require("../utils/errors");
+const { tokenErrorHandler, isTokens } = require("../utils/auth");
 const {
   createdResponse,
-  badRequestResponse,
   unauthorizedResponse,
   successResponse,
 } = require("../utils/response");
@@ -13,9 +11,8 @@ class OrderController {
     const { total_quantity, total_price, first_book_title } = req.body;
 
     try {
-      const authorization = ensureAuthorization(req, res);
-
-      if (authorization) {
+      const isToken = isTokens(req, res);
+      if (isToken) {
         const deliveryId = await OrderModel.insertDelivery(req.delivery);
 
         const values = [
@@ -33,31 +30,31 @@ class OrderController {
         return createdResponse(res, results[0]);
       } else unauthorizedResponse(res, "권한이 없습니다.");
     } catch (err) {
-      errorHandler(res, err);
+      tokenErrorHandler(res, err);
     }
   }
 
   async get(req, res) {
     try {
-      const authorization = ensureAuthorization(req, res);
-      if (authorization) {
+      const isToken = isTokens(req, res);
+      if (isToken) {
         const result = await OrderModel.get(req, res, authorization.id);
         return res.status(StatusCodes.OK).json(result);
       } else return unauthorizedResponse(res, "권한이 없습니다.");
     } catch (err) {
-      return badRequestResponse(res, err);
+      return tokenErrorHandler(res, err);
     }
   }
 
   async detail(req, res) {
     try {
-      const authorization = ensureAuthorization(req, res);
-      if (authorization) {
+      const isToken = isTokens(req, res);
+      if (isToken) {
         const result = await OrderModel.detail(req.params.id);
         return successResponse(res, result);
       } else return unauthorizedResponse(res, "권한이 없습니다.");
     } catch (err) {
-      return badRequestResponse(res, err);
+      return tokenErrorHandler(res, err);
     }
   }
 }

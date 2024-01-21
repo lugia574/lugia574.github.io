@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const cookieParser = require("cookie-parser");
+
 // dotenv 모듈
 const dotenv = require("dotenv");
 dotenv.config();
@@ -13,6 +15,7 @@ const ordersRouter = require("./routes/orders.js");
 const booksRouter = require("./routes/books.js");
 const categoryRouter = require("./routes/category.js");
 
+app.use(cookieParser());
 // app.set("view engine", "pug");
 // app.set("views", process.cwd() + "/lugia574.github.io/sprint2-book-shop/views");
 

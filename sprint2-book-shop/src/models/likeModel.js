@@ -8,7 +8,7 @@ class LikeModel {
       const [result, fields] = await conn.query(sql, values);
       return result;
     } catch (err) {
-      return err;
+      throw err;
     }
   }
 
@@ -21,7 +21,7 @@ class LikeModel {
       const [result, fields] = await conn.query(sql, values);
       return result;
     } catch (err) {
-      return res.status(StatusCodes.BAD_REQUEST).json(err);
+      throw err;
     }
   }
 }

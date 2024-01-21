@@ -46,7 +46,7 @@ class UserModel {
         return user;
       } else return false;
     } catch (err) {
-      return err;
+      throw err;
     }
   }
 
@@ -62,9 +62,9 @@ class UserModel {
       const [result, fields] = await conn.query(sql, values);
       return result.affectedRows;
     } catch (err) {
-      return err;
+      throw err;
     }
   }
 }
 
-module.exports = new UserModel();
+module.exports = UserModel;

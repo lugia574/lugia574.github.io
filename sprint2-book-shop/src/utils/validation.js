@@ -1,9 +1,15 @@
 // 선언 잋 미들웨어, 변수
-const { query } = require("express");
-const { body, param, validationResult, check } = require("express-validator");
+
+const {
+  body,
+  param,
+  validationResult,
+  check,
+  query,
+} = require("express-validator");
 const { badRequestResponse } = require("./response");
 
-const validate = (req, res) => {
+const validate = (req, res, next) => {
   const err = validationResult(req);
   const { errors } = err;
   if (!err.isEmpty()) return badRequestResponse(res, errors);
@@ -23,22 +29,22 @@ const validPassword = body("password")
 const validId = param("id").notEmpty().withMessage("잘못된 정도 입니다.");
 
 // book
-const validLimit = check("limit")
+const validLimit = query("limit")
   .notEmpty()
   .isInt()
   .withMessage("페이지내 도서 갯수를 지정해주세요.");
 
-const validCurrentPage = check("currentPage")
+const validCurrentPage = query("currentPage")
   .notEmpty()
   .isInt()
   .withMessage("페이지를 지정해주세요");
 
-const validNews = check("news")
+const validNews = query("news")
   .notEmpty()
   .isBoolean()
   .withMessage("신간보기 설정 해주세요");
 
-const validCategoryId = check("category_id").isInt()().notEmpty();
+const validCategoryId = query("category_id").isInt().notEmpty();
 
 // cart
 const validBookId = body("book_id")

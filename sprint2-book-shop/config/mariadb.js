@@ -12,7 +12,7 @@ class Database {
   static async getDBConnection() {
     try {
       if (!this.db) {
-        await mariadb.createConnection(dbConf);
+        mariadb.createConnection(dbConf);
         const pool = mariadb.createPool(dbConf);
         const promisePool = pool.promise();
         this.db = promisePool;
@@ -25,4 +25,4 @@ class Database {
   }
 }
 
-module.exports = new Database();
+module.exports = Database;
