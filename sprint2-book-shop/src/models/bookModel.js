@@ -1,4 +1,4 @@
-const database = require("../../config/mariadb");
+const Database = require("../../config/mariadb");
 const ensureAuthorization = require("../utils/auth");
 
 class BookModel {
@@ -24,7 +24,7 @@ class BookModel {
     values.push(parseInt(limit), offset);
 
     try {
-      const conn = await database.getDBConnection();
+      const conn = await Database.getDBConnection();
       let [result, fields] = await conn.query(sql, values);
       return result.map((e) => {
         e.pubDate = e.pub_date;
@@ -39,7 +39,7 @@ class BookModel {
 
   static async getTotalCount() {
     const sql = "SELECT count(*) AS totalCount FROM Bookshop.books";
-    const conn = await database.getDBConnection();
+    const conn = await Database.getDBConnection();
     const [result, fields] = await conn.execute(sql);
     const [{ totalCount }] = result;
     return totalCount;
@@ -63,7 +63,7 @@ class BookModel {
     values.push(bookId);
 
     try {
-      const conn = await database.getDBConnection();
+      const conn = await Database.getDBConnection();
       const [result, fields] = await conn.query(sql, values);
       if (result[0])
         return result.map((e) => {

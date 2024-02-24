@@ -1,10 +1,12 @@
+const Database = require("../../config/mariadb");
+
 class CartsModel {
   async add(req, res, bookId, quantity) {
     const sql = `INSERT INTO cartItems (book_id, quantity, user_id) VALUES(?, ?, ?)`;
 
     try {
       const values = [bookId, quantity, authorization.id];
-      const conn = await database.getDBConnection();
+      const conn = await Database.getDBConnection();
       const [result, fields] = await conn.query(sql, values);
       return result;
     } catch (err) {
@@ -23,7 +25,7 @@ class CartsModel {
         values.push(selected);
       }
 
-      const conn = await database.getDBConnection();
+      const conn = await Database.getDBConnection();
       const [result, fields] = await conn.query(sql, values);
       return result;
     } catch (err) {
@@ -35,7 +37,7 @@ class CartsModel {
     const sql = `DELETE FROM cartItems WHERE id = ?`;
 
     try {
-      const conn = await database.getDBConnection();
+      const conn = await Database.getDBConnection();
       const [result, fields] = await conn.query(sql, cartItemId);
       return result;
     } catch (err) {

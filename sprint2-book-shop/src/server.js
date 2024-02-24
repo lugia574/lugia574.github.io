@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 const cookieParser = require("cookie-parser");
 
@@ -16,6 +17,13 @@ const booksRouter = require("./routes/books.js");
 const categoryRouter = require("./routes/category.js");
 
 app.use(cookieParser());
+// 모든 요청에 대해 CORS 허용
+app.use(
+  cors({
+    origin: "http://localhost:3000", // 클라이언트의 출처
+    credentials: true, // withCredentials 사용할 때 필요
+  })
+);
 // app.set("view engine", "pug");
 // app.set("views", process.cwd() + "/lugia574.github.io/sprint2-book-shop/views");
 
