@@ -26,16 +26,15 @@ class UserController {
     try {
       const loginUser = await userModel.login(email, password);
       if (loginUser) {
-        const accessToken = signAccessToken(loginUser.id, loginUser.email);
+        const token = signAccessToken(loginUser.id, loginUser.email);
         const refreshAffectedRows = await signRefreshToken(loginUser.id);
         if (!refreshAffectedRows) return badRequestResponse(res, "변경 실패");
 
         // 쿠키에 담기
-        res.cookie("accessToken", accessToken, {
+        res.cookie("token", token, {
           httpOnly: true,
         });
-
-        return successResponse({ ...res }, "로그인");
+        return successResponse(res, { ...loginUser, token: token });
       } else return unauthorizedResponse(res, "입력 정보가 맞지 않습니다.");
     } catch (err) {
       console.log(err);
