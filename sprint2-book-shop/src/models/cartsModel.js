@@ -45,4 +45,4 @@ class CartsModel {
     }
   }
 }
-module.exports = new CartsModel();
+module.exports = CartsModel;

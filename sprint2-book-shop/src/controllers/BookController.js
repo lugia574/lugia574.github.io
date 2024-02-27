@@ -13,6 +13,7 @@ class BookController {
     const allBooksRes = {};
     const { news, limit, currentPage } = req.query;
     const categoryId = req.query.category_id;
+    console.log(news, limit, categoryId, currentPage, "먼데 ㅅㅂ");
 
     try {
       const books = await BookModel.getBooks(

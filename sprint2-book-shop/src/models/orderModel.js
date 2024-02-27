@@ -101,4 +101,4 @@ class OrderModel {
   }
 }
 
-module.exports = new OrderModel();
+module.exports = OrderModel;

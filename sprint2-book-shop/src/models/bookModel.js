@@ -4,14 +4,16 @@ const ensureAuthorization = require("../utils/auth");
 class BookModel {
   static async getBooks(categoryId, news, limit, currentPage) {
     const offset = limit * (currentPage - 1);
-
     let sql = `SELECT *, (SELECT count(*) FROM likes WHERE book_id = books.id) 
             AS likes FROM books`;
 
     let values = [];
+
+    console.log(news, "news 먼데");
+
     if (categoryId && news) {
-      sql +=
-        " WHERE category_id = ? AND pub_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+      sql += ` WHERE category_id = ? AND pub_date 
+      BETWEEN DATE_SUB(NOW(), INTERVAL 6 MONTH) AND NOW()`;
       values.push(categoryId);
     } else if (categoryId) {
       sql += " WHERE category_id = ?";
@@ -22,6 +24,9 @@ class BookModel {
 
     sql += " LIMIT ? OFFSET ?";
     values.push(parseInt(limit), offset);
+
+    console.log(sql);
+    console.log(values);
 
     try {
       const conn = await Database.getDBConnection();
@@ -78,4 +83,4 @@ class BookModel {
   }
 }
 
-module.exports = new BookModel();
+module.exports = BookModel;

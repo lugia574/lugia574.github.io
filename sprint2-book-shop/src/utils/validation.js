@@ -1,12 +1,6 @@
 // 선언 잋 미들웨어, 변수
 
-const {
-  body,
-  param,
-  validationResult,
-  check,
-  query,
-} = require("express-validator");
+const { body, param, validationResult, query } = require("express-validator");
 const { badRequestResponse } = require("./response");
 
 const validate = (req, res, next) => {
@@ -39,10 +33,10 @@ const validCurrentPage = query("currentPage")
   .isInt()
   .withMessage("페이지를 지정해주세요");
 
-const validNews = query("news")
-  .notEmpty()
-  .isBoolean()
-  .withMessage("신간보기 설정 해주세요");
+// const validNews = query("news")
+//   .notEmpty()
+//   .isBoolean()
+//   .withMessage("신간보기 설정 해주세요");
 
 const validCategoryId = query("category_id").isInt().notEmpty();
 
@@ -101,5 +95,4 @@ module.exports = {
   validTotalQunatity,
   validTotalPrice,
   validUserId,
-  validNews,
 };

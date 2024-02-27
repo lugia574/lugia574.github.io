@@ -26,4 +26,4 @@ class LikeModel {
   }
 }
 
-module.exports = new LikeModel();
+module.exports = LikeModel;

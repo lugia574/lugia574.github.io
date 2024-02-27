@@ -7,16 +7,11 @@ const {
   validLimit,
   validCurrentPage,
   validId,
-  validNews,
 } = require("../utils/validation");
 
 router.use(express.json());
 
-router.get(
-  "/",
-  [validLimit, validCurrentPage, validNews, validate],
-  BookController.get
-);
+router.get("/", [validLimit, validCurrentPage, validate], BookController.get);
 router.get("/:id", [validId, validate], BookController.detail);
 
 module.exports = router;
