@@ -1,65 +1,50 @@
-# lugia574.github.io
+# React + TypeScript + Vite
 
-프로그래머스 스프린트 project
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-![](./ERD.png)
+Currently, two official plugins are available:
 
-[깃헙 배포 페이지 링크](https://lugia574.github.io/)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 패키지 구조
+## Expanding the ESLint configuration
 
-```
-/project-root
-|-- /src
-|   |-- /controllers
-|   |   |-- bookController.js
-|   |   |-- userController.js
-|   |   |-- orderController.js
-|   |   |-- ...
-|   |-- /models
-|   |   |-- bookModel.js
-|   |   |-- userModel.js
-|   |   |-- orderModel.js
-|   |   |-- ...
-|   |-- /routes
-|   |   |-- books.js
-|   |   |-- users.js
-|   |   |-- orders.js
-|   |   |-- ...
-|   |-- /utils
-|   |   |-- auth.js
-|   |   |-- encryption.js
-|   |   |-- response.js
-|   |   |-- validation.js
-|   |-- /views
-|   |-- server.js
-|-- /config
-|   |-- mariadb.js
-|-- /public
-|-- package.json
-|-- README.md
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-## 이제까지 한거
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-- 패키지 구조 개편
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-- 그에 따른 모듈화
-
-  model, dto, response 등 분리
-
-- 해당 API 돌아가는지 체크 >> book 기능 하다가 컬럼 조정해야지 하고 멈춤
-
-- mvc 로 완전히 분리
-
-- 유효성검사
-
-## ToDo List
-
-- 예외처리
-
-## 할려다가 안한것
-
-- 싱글톤 패턴 적용하기
-
-  [Node.js에서 singleton을 구현하려하지 마세요](https://kyungyeon.dev/posts/77)
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```
