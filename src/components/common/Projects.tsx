@@ -60,7 +60,7 @@ const ProjectsStyle = styled.div`
   padding: 4rem 1.5rem;
 
   .project-wrapper {
-    width: 70%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
