@@ -7,7 +7,8 @@ export type Colorkey =
   | "commentGray"
   | "borderGray"
   | "routeGray"
-  | "successGreen";
+  | "successGreen"
+  | "cove";
 export type ButtonSize = "large" | "medium" | "small";
 export type FontSize = "xlarge" | "large" | "medium" | "small" | "xsmall";
 export type MediaQuery = "mobile" | "desktop";
@@ -69,6 +70,7 @@ export const theme: Theme = {
     white: "#ffffff",
     orange: "#FF6020",
     red: "#F83030",
+    cove: "#130f40",
     commentGray: "#999999", // 댓글 쓴 포스팅 제목, 로그인 회원가입 글자
     borderGray: "#e7e7e7",
     routeGray: "#555555", // 대한민국 > 서울/경기•강원도•경상도

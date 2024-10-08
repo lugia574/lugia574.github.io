@@ -42,7 +42,7 @@ const AboutMeStyle = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 1.5rem;
+  padding: 4rem 0;
 
   .about-me-wrapper {
     width: 60%;
@@ -50,6 +50,7 @@ const AboutMeStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 3rem;
   }
   .about-me-items {
     width: 100%;

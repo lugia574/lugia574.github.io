@@ -46,6 +46,8 @@ const SkillsStyle = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 4rem 0;
+  gap: 3rem;
   .skill-set {
     border: solid 1px ${({ theme }) => theme.color.white};
     box-shadow: 2px 2px 2px ${({ theme }) => theme.color.black};

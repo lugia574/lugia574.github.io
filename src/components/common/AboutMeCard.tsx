@@ -34,6 +34,15 @@ const AboutMeCardStyle = styled.div`
     height: 2.5rem;
   }
 
+  .content > :first-child {
+    font-weight: 100;
+    font-size: ${({ theme }) => theme.fontSize.xsamll};
+  }
+
+  .content > :last-child {
+    font-weight: 600;
+  }
+
   @media (max-width: 768px) {
   }
 `;

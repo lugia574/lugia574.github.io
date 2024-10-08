@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    padding: 0;
+    padding: 0 1.5rem;
     margin: 0;
     color: #333333;
 
@@ -39,6 +39,11 @@ export const GlobalStyle = createGlobalStyle`
 
   a{
     text-decoration-line: none;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color:black
   }
 
   svg, path {
