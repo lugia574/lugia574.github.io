@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import Intro from "../common/Intro";
-import Skills from "../common/Skills";
-import Archiving from "../common/Archiving";
-import Projects from "../common/Projects";
-import Career from "../common/Career";
-import AboutMe from "../common/AboutMe";
+import Intro from "../../pages/Intro";
+import Skills from "../../pages/Skills";
+import Archiving from "../../pages/Archiving";
+import Projects from "../../pages/Projects";
+import Career from "../../pages/Career";
+import AboutMe from "../../pages/AboutMe";
+import TopButton from "../common/TopButton";
 // interface Props {}
 
 const Main = () => {
@@ -16,6 +17,7 @@ const Main = () => {
       <Archiving />
       <Projects />
       <Career />
+      <TopButton />
     </MainStyle>
   );
 };

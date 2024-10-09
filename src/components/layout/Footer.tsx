@@ -6,7 +6,7 @@ const Footer = () => {
 };
 
 const FooterStyle = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 6.25rem;
   display: flex;
   justify-content: center;

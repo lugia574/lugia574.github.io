@@ -57,8 +57,8 @@ const ProjectCardStyle = styled.div`
   flex-wrap: nowrap;
   .flip-box {
     display: flex;
-    width: 400px;
-    height: 400px;
+    width: 25rem;
+    height: 25rem;
     perspective: 1000px;
     cursor: pointer;
   }
@@ -76,8 +76,8 @@ const ProjectCardStyle = styled.div`
   }
 
   .front img {
-    width: 400px;
-    height: 400px;
+    width: 25rem;
+    height: 25rem;
     object-fit: cover;
     object-position: top;
   }

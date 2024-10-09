@@ -8,9 +8,9 @@ const Header = () => {
 
   const handleScrollToSection = (id: string) => {
     const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+    if (section) section.scrollIntoView({ behavior: "smooth" });
+
+    if (menuOpen) setMenuOpen((prev) => !prev);
   };
   return (
     <HeaderStyle>
@@ -41,7 +41,6 @@ const Header = () => {
             className="hamburger modile"
             onClick={() => setMenuOpen((prev) => !prev)}
           >
-            {/* 햄버거 버튼 */}
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
@@ -153,6 +152,7 @@ const HeaderStyle = styled.header`
   /* 모바일 반응형 */
   @media (max-width: 768px) {
     .header {
+      width: 100vw;
       height: auto;
     }
 

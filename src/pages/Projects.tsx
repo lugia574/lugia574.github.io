@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Title from "./Title";
-import ProjectCard from "./ProjectCard";
+import Title from "../components/common/Title";
+import ProjectCard from "../components/common/ProjectCard";
 // interface Props {}
 
 const PROJECTLIST = [
@@ -58,7 +58,6 @@ const Projects = () => {
 
 const ProjectsStyle = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -74,7 +73,6 @@ const ProjectsStyle = styled.div`
   }
 
   .project-items {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

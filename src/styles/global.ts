@@ -9,12 +9,13 @@ export const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: 16px; /* desktop */
+    scroll-behavior: smooth;
   }
 
   body {
-    padding: 0 1.5rem;
     margin: 0;
     color: #333333;
+    height: auto;
 
     /* 스크롤바 Track(트랙) */
     ::-webkit-scrollbar {
@@ -65,4 +66,10 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 14px;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
 `;

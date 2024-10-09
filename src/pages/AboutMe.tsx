@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Title from "./Title";
-import AboutMeCard from "./AboutMeCard";
+import Title from "../components/common/Title";
+import AboutMeCard from "../components/common/AboutMeCard";
 import { FaRegCalendar, FaUser } from "react-icons/fa";
 import { FaLocationPin } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
@@ -42,7 +42,7 @@ const AboutMeStyle = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 0;
+  padding: 4rem 1.5rem;
 
   .about-me-wrapper {
     width: 60%;
