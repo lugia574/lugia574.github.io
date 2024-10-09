@@ -152,7 +152,7 @@ const HeaderStyle = styled.header`
   /* 모바일 반응형 */
   @media (max-width: 768px) {
     .header {
-      width: 100vw;
+      width: 100%;
       height: auto;
     }
 

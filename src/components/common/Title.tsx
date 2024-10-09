@@ -8,6 +8,7 @@ const Title = ({ children }: Props) => {
 };
 
 const TitleStyle = styled.h1`
+  text-align: center;
   font-size: ${({ theme }) => theme.fontSize["xlarge"]};
 `;
 

@@ -43,18 +43,20 @@ const Skills = () => {
 };
 
 const SkillsStyle = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 0;
-  gap: 3rem;
   .skills-wrapper {
-    padding: 3rem;
-  }
-  .skill-set {
+    display: flex;
     width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+  }
+
+  /* gap: 3rem; */
+  /* .skills-wrapper {
+    padding: 3rem;
+  } */
+  .skill-set {
     border: solid 1px ${({ theme }) => theme.color.white};
     box-shadow: 2px 2px 2px ${({ theme }) => theme.color.black};
     border-radius: 3px;
