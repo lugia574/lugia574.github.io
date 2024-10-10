@@ -42,6 +42,7 @@ const AboutMeStyle = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 35rem;
   padding: 4rem 1.5rem;
 
   .about-me-wrapper {
