@@ -22,6 +22,11 @@ const Main = () => {
   );
 };
 
-const MainStyle = styled.div``;
+const MainStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default Main;
