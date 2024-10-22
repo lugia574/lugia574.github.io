@@ -6,6 +6,7 @@ import { FaLocationPin } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { IoIosSchool } from "react-icons/io";
 import { BsFillTelephoneFill } from "react-icons/bs";
+
 // interface Props {}
 
 const ABOUTLIST = [
@@ -39,7 +40,6 @@ const AboutMe = () => {
 
 const AboutMeStyle = styled.div`
   display: flex;
-
   flex-direction: column;
   justify-content: center;
   align-items: center;

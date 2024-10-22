@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import Star from "../components/effects/Star";
 // interface Props {}
 
 const Intro = () => {
   return (
     <IntroStyle>
       <h1 className="typing">FrontEnd 개발자 이철욱입니다.</h1>
+      <Star />
     </IntroStyle>
   );
 };
@@ -14,6 +16,7 @@ const IntroStyle = styled.div`
 
   background-image: url("/images/portpolio-main.jpg");
   background-size: cover;
+  background-position: top;
   width: 100%;
   height: 58rem;
   justify-content: center;

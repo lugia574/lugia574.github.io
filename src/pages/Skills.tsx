@@ -6,7 +6,7 @@ const Skills = () => {
   return (
     <SkillsStyle id="skills">
       <div className="skills-wrapper">
-        <Title children={"skills"} />
+        <Title children={"Skills"} />
         <div className="skill-set">
           <section className="section language">
             <div className="label">Language</div>
