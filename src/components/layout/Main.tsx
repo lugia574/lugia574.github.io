@@ -23,6 +23,8 @@ const Main = () => {
 };
 
 const MainStyle = styled.div`
+  background-color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.color.white};
   display: flex;
   flex-direction: column;
   justify-content: center;

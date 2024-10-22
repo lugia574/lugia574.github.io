@@ -49,17 +49,18 @@ const SkillsStyle = styled.div`
   justify-content: center;
 
   .skills-wrapper {
-    width: 800px;
+    width: 750px;
     display: flex;
-
+    gap: 5rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 4rem 0;
+    padding: 4rem 1rem;
   }
 
   .skill-set {
-    background-color: ${({ theme }) => theme.color.white};
+    width: 100%;
+    color: ${({ theme }) => theme.color.white};
     border: solid 1px ${({ theme }) => theme.color.white};
     box-shadow: 2px 2px 2px ${({ theme }) => theme.color.black};
     border-radius: 3px;

@@ -80,6 +80,7 @@ const ProjectCardStyle = styled.div`
     height: 25rem;
     object-fit: cover;
     object-position: top;
+    opacity: 0.8;
   }
 
   .overlay {
@@ -122,7 +123,8 @@ const ProjectCardStyle = styled.div`
   }
 
   .back {
-    border: solid 1px ${({ theme }) => theme.color.black};
+    background-color: ${({ theme }) => theme.color.white};
+    border: solid 1px ${({ theme }) => theme.color.white};
     color: ${({ theme }) => theme.color.black};
     transform: rotateY(180deg);
 

@@ -8,11 +8,13 @@ const Archiving = () => {
       <div className="archiving-warpper">
         <Title children={"Archiving"} />
         <div className="archiving-set">
-          <div className="archiving-box">
-            <a href="https://velog.io/@lcw574/posts">벨로그</a>
+          <div className="archiving-box github">
+            <a href="https://github.com/lugia574">
+              <img src="/images/GitHub.png" alt="" />
+            </a>
           </div>
-          <div className="archiving-box">
-            <a href="https://github.com/lugia574">깃헙</a>
+          <div className="archiving-box velog">
+            <a href="https://velog.io/@lcw574/posts">velog</a>
           </div>
         </div>
       </div>
@@ -27,7 +29,8 @@ const ArchivingStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 4rem 0;
+    padding: 4rem 1rem;
+    gap: 5rem;
   }
 
   .archiving-set {
@@ -44,11 +47,30 @@ const ArchivingStyle = styled.div`
     }
 
     .archiving-box {
-      width: 350px;
+      width: 26rem;
       height: 300px;
+      font-size: ${({ theme }) => theme.fontSize.xlarge};
       display: flex;
       justify-content: center;
       align-items: center;
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 3px;
+      }
+    }
+
+    .velog {
+      background-color: #66cc99;
+      a {
+        font-weight: 600;
+        font-style: oblique;
+      }
+    }
+
+    .github {
+      background-color: ${({ theme }) => theme.color.white};
     }
   }
 `;

@@ -101,8 +101,7 @@ const HeaderStyle = styled.header<{ scrolled: boolean }>`
     padding: 1rem 2rem;
     background-color: ${({ scrolled, theme }) =>
       scrolled ? theme.color.black : "transparent"};
-    color: ${({ scrolled, theme }) =>
-      scrolled ? theme.color.white : theme.color.black};
+    color: ${({ theme }) => theme.color.white};
     transition: height 0.3s ease-in-out;
     overflow: hidden;
     height: auto; /* 기본 헤더 높이 */

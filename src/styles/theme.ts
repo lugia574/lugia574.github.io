@@ -66,8 +66,8 @@ export const theme: Theme = {
   /* font-color */
   color: {
     primary: "#7aafff", // skyBlue
-    black: "#333333",
-    white: "#ffffff",
+    black: "#000000",
+    white: "#ffffffcc",
     orange: "#FF6020",
     red: "#F83030",
     cove: "#130f40",

@@ -12,7 +12,8 @@ const Intro = () => {
 const IntroStyle = styled.div`
   display: flex;
 
-  background-color: ${({ theme }) => theme.color.orange};
+  background-image: url("/images/portpolio-main.jpg");
+  background-size: cover;
   width: 100%;
   height: 58rem;
   justify-content: center;
@@ -42,12 +43,12 @@ const IntroStyle = styled.div`
     width: 0%;
     height: 100%;
     overflow: hidden;
-    color: ${({ theme }) => theme.color.black};
+    color: ${({ theme }) => theme.color.white};
     letter-spacing: -0.1rem;
     padding-top: 0.2em;
     white-space: nowrap;
     line-height: 1;
-    border-right: 3px solid ${({ theme }) => theme.color.black};
+    border-right: 3px solid ${({ theme }) => theme.color.white};
     animation: typing 5s steps(25) infinite;
   }
 

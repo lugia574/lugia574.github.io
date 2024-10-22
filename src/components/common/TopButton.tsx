@@ -41,8 +41,8 @@ const Button = styled.button`
   position: fixed;
   bottom: 3rem;
   right: 3rem;
-  background-color: #007bff;
-  color: white;
+  background-color: #8888;
+  color: ${({ theme }) => theme.color.white};
   border: none;
   font-weight: 600;
   border-radius: 50%;
@@ -58,7 +58,8 @@ const Button = styled.button`
   }
 
   &:hover {
-    background-color: #0056b3;
+    background-color: ${({ theme }) => theme.color.white};
+    color: ${({ theme }) => theme.color.black};
   }
 `;
 
