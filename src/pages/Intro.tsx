@@ -11,12 +11,19 @@ const Intro = () => {
 
 const IntroStyle = styled.div`
   display: flex;
+
+  background-color: ${({ theme }) => theme.color.orange};
   width: 100%;
+  height: 58rem;
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
   font-size: 1rem;
   .typing {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-use-select: none;
+    user-select: none;
+
     text-transform: capitalize;
     white-space: nowrap;
     color: transparent;

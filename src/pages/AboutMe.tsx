@@ -39,10 +39,10 @@ const AboutMe = () => {
 
 const AboutMeStyle = styled.div`
   display: flex;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 35rem;
   padding: 4rem 1.5rem;
 
   .about-me-wrapper {
@@ -58,7 +58,7 @@ const AboutMeStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 5rem 10rem;
   }
 
   @media (max-width: 768px) {

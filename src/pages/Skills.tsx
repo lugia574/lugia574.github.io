@@ -31,6 +31,7 @@ const Skills = () => {
           <section className="section backend">
             <div className="label">Backend</div>
             <ul className="skill-set-contents">
+              <li>Express.js</li>
               <li>MariaDB</li>
               <li>Firebase</li>
               <li>MongoDB</li>
@@ -43,20 +44,22 @@ const Skills = () => {
 };
 
 const SkillsStyle = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
   .skills-wrapper {
+    width: 800px;
     display: flex;
-    width: 100%;
+
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 4rem 0;
   }
 
-  /* gap: 3rem; */
-  /* .skills-wrapper {
-    padding: 3rem;
-  } */
   .skill-set {
+    background-color: ${({ theme }) => theme.color.white};
     border: solid 1px ${({ theme }) => theme.color.white};
     box-shadow: 2px 2px 2px ${({ theme }) => theme.color.black};
     border-radius: 3px;

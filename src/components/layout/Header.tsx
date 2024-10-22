@@ -1,10 +1,11 @@
 // interface Props {}
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const handleScrollToSection = (id: string) => {
     const section = document.getElementById(id);
@@ -12,8 +13,26 @@ const Header = () => {
 
     if (menuOpen) setMenuOpen((prev) => !prev);
   };
+
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 50) {
+      setScrolled(true); // 50px 이상 스크롤하면 스타일 변경
+    } else {
+      setScrolled(false); // 스크롤이 50px 미만이면 초기 상태 유지
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <HeaderStyle>
+    <HeaderStyle scrolled={scrolled}>
       <div className="header">
         <div className="header-main">
           <div className="logo">My Logo</div>
@@ -73,23 +92,26 @@ const Header = () => {
   );
 };
 
-const HeaderStyle = styled.header`
+const HeaderStyle = styled.header<{ scrolled: boolean }>`
   .header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: ${({ theme }) => theme.color.black};
-    color: ${({ theme }) => theme.color.white};
+    background-color: ${({ scrolled, theme }) =>
+      scrolled ? theme.color.black : "transparent"};
+    color: ${({ scrolled, theme }) =>
+      scrolled ? theme.color.white : theme.color.black};
     transition: height 0.3s ease-in-out;
     overflow: hidden;
-    height: 5rem; /* 기본 헤더 높이 */
+    height: auto; /* 기본 헤더 높이 */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100000;
+    font-weight: 600;
   }
 
   .header.expanded {
@@ -105,7 +127,7 @@ const HeaderStyle = styled.header`
   }
 
   .logo {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   .desktop-nav {
     display: flex;
