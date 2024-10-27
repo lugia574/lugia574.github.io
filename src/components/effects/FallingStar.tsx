@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-interface StarProps {
+interface FallingStarProps {
   count?: number;
   white?: boolean;
   maxDelay?: number;
@@ -11,40 +11,42 @@ interface StarProps {
   direction?: "left" | "right";
 }
 
-const MAX_STAR_COUNT = 6;
+const MAX_FallingStar_COUNT = 50;
 const colors = ["#c77eff", "#f6ff7e", "#ff8d7e", "#ffffff"];
 
-const Star = ({
-  count = 6,
+const FallingStar = ({
+  count = 12,
   maxDelay = 15,
   minSpeed = 2,
   maxSpeed = 4,
   angle = 30,
   direction = "left",
-}: StarProps) => {
-  const starCount = count < MAX_STAR_COUNT ? count : MAX_STAR_COUNT;
-  const [starInterval, setStarInterval] = useState<number>(0);
+}: FallingStarProps) => {
+  const FallingStarCount =
+    count < MAX_FallingStar_COUNT ? count : MAX_FallingStar_COUNT;
+  const [FallingStarInterval, setFallingStarInterval] = useState<number>(0);
 
   useEffect(() => {
-    const calcStarInterval = () => {
+    const calcFallingStarInterval = () => {
       const innnerWidth = window.innerWidth;
-      setStarInterval(Math.floor((innnerWidth * 1.5) / (count * 5)));
+      setFallingStarInterval(Math.floor((innnerWidth * 1.5) / (count * 5)));
     };
 
-    calcStarInterval();
-    window.addEventListener("resize", calcStarInterval);
+    calcFallingStarInterval();
+    window.addEventListener("resize", calcFallingStarInterval);
     return () => {
-      window.removeEventListener("resize", calcStarInterval);
+      window.removeEventListener("resize", calcFallingStarInterval);
     };
   }, []);
   return (
-    <StarStyle $direction={direction} $angle={angle}>
-      {new Array(starCount).fill(0).map((e, idx) => {
+    <FallingStarStyle $direction={direction} $angle={angle}>
+      {new Array(FallingStarCount).fill(0).map((_e, idx) => {
         const left =
           direction === "left"
-            ? `${Math.random() * count * 5 * starInterval}px`
+            ? `${Math.random() * count * 5 * FallingStarInterval}px`
             : `${
-                window.innerHeight - Math.random() * count * 5 * starInterval
+                window.innerHeight -
+                Math.random() * count * 5 * FallingStarInterval
               }px`;
         const animationDelay = `${Math.random() * maxDelay}s`;
         const animationDuration =
@@ -65,20 +67,21 @@ const Star = ({
               width: size,
               height: size,
             }}
-            className="star"
+            className="FallingStar"
           ></div>
         );
       })}
-    </StarStyle>
+    </FallingStarStyle>
   );
 };
 
-interface StarStyleProps {
+interface FallingStarStyleProps {
   $direction: "left" | "right";
   $angle: number;
 }
 
-const StarStyle = styled.div<StarStyleProps>`
+const FallingStarStyle = styled.div<FallingStarStyleProps>`
+  position: fix;
   top: 0;
   left: 0;
   right: 0;
@@ -87,7 +90,7 @@ const StarStyle = styled.div<StarStyleProps>`
   z-index: 999;
   overflow: hidden;
 
-  .star {
+  .FallingStar {
     position: relative;
     top: 50%;
     width: 4px;
@@ -98,7 +101,7 @@ const StarStyle = styled.div<StarStyleProps>`
       ease-in infinite;
     opacity: 0;
   }
-  .star::after {
+  .FallingStar::after {
     position: absolute;
     top: calc(50% - 1px);
     left: -950%;
@@ -112,11 +115,11 @@ const StarStyle = styled.div<StarStyleProps>`
           : `rotateZ(-${180 - props.$angle}/deg)`}
       translateX(50%);
   }
-  .star:nth-child(2) {
+  .FallingStar:nth-child(2) {
     transform: translateX(300px);
     animation-delay: 5.1s;
   }
-  .star:nth-child(3) {
+  .FallingStar:nth-child(3) {
     transform: translateX(450px);
     animation-delay: 1s;
   }
@@ -139,4 +142,4 @@ const MeteorKeyframe = (
         opacity: 1;
     }
 `;
-export default Star;
+export default FallingStar;

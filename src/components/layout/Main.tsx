@@ -6,6 +6,7 @@ import Projects from "../../pages/Projects";
 import Career from "../../pages/Career";
 import AboutMe from "../../pages/AboutMe";
 import TopButton from "../common/TopButton";
+import TwinkleStar from "../effects/TwinkleStar";
 // import Star from "../effects/Star";
 // interface Props {}
 
@@ -19,6 +20,7 @@ const Main = () => {
       <Projects />
       <Career />
       <TopButton />
+      <TwinkleStar />
     </MainStyle>
   );
 };
