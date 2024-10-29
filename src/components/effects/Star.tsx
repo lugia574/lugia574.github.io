@@ -39,7 +39,7 @@ const Star = ({
   }, []);
   return (
     <StarStyle $direction={direction} $angle={angle}>
-      {new Array(starCount).fill(0).map((e, idx) => {
+      {new Array(starCount).fill(0).map((_e, idx) => {
         const left =
           direction === "left"
             ? `${Math.random() * count * 5 * starInterval}px`
