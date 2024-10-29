@@ -16,11 +16,11 @@ const PROJECTLIST = [
 
   {
     name: "도서 구매사이트",
-    imgSrc: "/images/7days-main.png",
+    imgSrc: "/images/bookstore-main.png",
     summary: "도서 구매사이트 프로젝트입니다.",
     period: "23.12.11 ~ 24.01.15",
     tech: "TypeScript, react.js, Zutand, React-Query ...",
-    source: "https://github.com/7days-routrip/routrip",
+    source: "https://github.com/lugia574/book-store",
   },
 
   {
@@ -29,15 +29,15 @@ const PROJECTLIST = [
     summary: "유튜브 클론 사이트 프로젝트입니다.",
     period: "24.04.23~24.05.24",
     tech: "TypeScript, react.js, Zutand, React-Query ...",
-    source: "https://github.com/7days-routrip/routrip",
+    source: "https://github.com/lugia574/nomad-cloneYoutube.github.io",
   },
   {
-    name: "트위터 클론 사이트",
-    imgSrc: "/images/7days-main.png",
-    summary: "트위터 클론 사이트 프로젝트입니다.",
+    name: "모멤텀 앱 클론 사이트",
+    imgSrc: "/images/momentum_main.png",
+    summary: "모멤텀 앱 클론 사이트 프로젝트입니다.",
     period: "24.04.23~24.05.24",
-    tech: "TypeScript, react.js, Zutand, React-Query ...",
-    source: "https://github.com/7days-routrip/routrip",
+    tech: "HTML, JavaScript, CSS",
+    source: "https://github.com/lugia574/Rugia_momentum.github.io",
   },
 ];
 
@@ -57,6 +57,10 @@ const Projects = () => {
 };
 
 const ProjectsStyle = styled.div`
+  background-color: ${({ theme }) => theme.color.backGroundGray};
+  width: 75%;
+  z-index: 2;
+
   display: flex;
   flex-direction: column;
   justify-content: center;

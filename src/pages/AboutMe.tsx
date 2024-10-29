@@ -44,7 +44,9 @@ const AboutMeStyle = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4rem 1.5rem;
-
+  background-color: ${({ theme }) => theme.color.backGroundGray};
+  width: 75%;
+  z-index: 2;
   .about-me-wrapper {
     width: 60%;
     display: flex;

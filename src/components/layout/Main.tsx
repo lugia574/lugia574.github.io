@@ -3,7 +3,6 @@ import Intro from "../../pages/Intro";
 import Skills from "../../pages/Skills";
 import Archiving from "../../pages/Archiving";
 import Projects from "../../pages/Projects";
-import Career from "../../pages/Career";
 import AboutMe from "../../pages/AboutMe";
 import TopButton from "../common/TopButton";
 import TwinkleStar from "../effects/TwinkleStar";
@@ -18,7 +17,7 @@ const Main = () => {
       <Skills />
       <Archiving />
       <Projects />
-      <Career />
+      {/* <Career /> */}
       <TopButton />
       <TwinkleStar />
     </MainStyle>

@@ -8,7 +8,8 @@ export type Colorkey =
   | "borderGray"
   | "routeGray"
   | "successGreen"
-  | "cove";
+  | "cove"
+  | "backGroundGray";
 export type ButtonSize = "large" | "medium" | "small";
 export type FontSize = "xlarge" | "large" | "medium" | "small" | "xsmall";
 export type MediaQuery = "mobile" | "desktop";
@@ -75,6 +76,7 @@ export const theme: Theme = {
     borderGray: "#e7e7e7",
     routeGray: "#555555", // 대한민국 > 서울/경기•강원도•경상도
     successGreen: "#2ecc71",
+    backGroundGray: "#0A0A0A",
   },
 
   /* font-size */

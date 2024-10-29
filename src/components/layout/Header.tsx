@@ -35,7 +35,7 @@ const Header = () => {
     <HeaderStyle scrolled={scrolled}>
       <div className="header">
         <div className="header-main">
-          <div className="logo">My Logo</div>
+          <div className="logo"></div>
           <nav className="desktop-nav">
             <div className="" onClick={() => handleScrollToSection("about-me")}>
               About me

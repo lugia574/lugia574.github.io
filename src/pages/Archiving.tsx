@@ -23,6 +23,10 @@ const Archiving = () => {
 };
 
 const ArchivingStyle = styled.div`
+  background-color: ${({ theme }) => theme.color.backGroundGray};
+  width: 75%;
+  z-index: 2;
+
   .archiving-warpper {
     display: flex;
     width: 100%;
@@ -35,7 +39,6 @@ const ArchivingStyle = styled.div`
 
   .archiving-set {
     width: 100%;
-    background-color: ${({ theme }) => theme.color.black};
     border-radius: 3px;
     display: flex;
     justify-content: center;

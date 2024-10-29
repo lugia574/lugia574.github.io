@@ -44,7 +44,9 @@ const Skills = () => {
 };
 
 const SkillsStyle = styled.div`
-  width: 100%;
+  background-color: ${({ theme }) => theme.color.backGroundGray};
+  width: 75%;
+  z-index: 2;
   display: flex;
   justify-content: center;
 

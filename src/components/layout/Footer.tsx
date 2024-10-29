@@ -7,10 +7,11 @@ const Footer = () => {
 
 const FooterStyle = styled.div`
   width: 100%;
-  height: 6.25rem;
+  height: 15rem;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
+  padding: 2rem;
   background-color: ${({ theme }) => theme.color.black};
   color: ${({ theme }) => theme.color.white};
   @media (max-width: 768px) {
