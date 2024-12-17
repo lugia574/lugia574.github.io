@@ -254,7 +254,7 @@ Error generating stack: `+i.message+`
 `,ki=({children:e})=>v.jsx(n0,{children:e}),n0=ge.h1`
   text-align: center;
   font-size: ${({theme:e})=>e.fontSize.xlarge};
-`,r0=()=>v.jsx(l0,{id:"skills",children:v.jsxs("div",{className:"skills-wrapper",children:[v.jsx(ki,{children:"Skills"}),v.jsxs("div",{className:"skill-set",children:[v.jsxs("section",{className:"section language",children:[v.jsx("div",{className:"label",children:"Language"}),v.jsxs("ul",{className:"skill-set-contents",children:[v.jsx("li",{children:"JavaScript"}),v.jsx("li",{children:"TypeScript"}),v.jsx("li",{children:"Python"}),v.jsx("li",{children:"Java"})]})]}),v.jsxs("section",{className:"section frontend",children:[v.jsx("div",{className:"label",children:"Frontend"}),v.jsxs("ul",{className:"skill-set-contents",children:[v.jsx("li",{children:"React.js"}),v.jsx("li",{children:"Zustand"}),v.jsx("li",{children:"React-Hook-Form"}),v.jsx("li",{children:"TanStack Query"}),v.jsx("li",{children:"styled-components"}),v.jsx("li",{children:"Sass"})]})]}),v.jsxs("section",{className:"section backend",children:[v.jsx("div",{className:"label",children:"Backend"}),v.jsxs("ul",{className:"skill-set-contents",children:[v.jsx("li",{children:"Express.js"}),v.jsx("li",{children:"MariaDB"}),v.jsx("li",{children:"Firebase"}),v.jsx("li",{children:"MongoDB"})]})]})]})]})}),l0=ge.div`
+`,r0=()=>v.jsx(l0,{id:"skills",children:v.jsxs("div",{className:"skills-wrapper",children:[v.jsx(ki,{children:"Skills"}),v.jsxs("div",{className:"skill-set",children:[v.jsxs("section",{className:"section language",children:[v.jsx("div",{className:"label label-language",children:"Language"}),v.jsxs("ul",{className:"skill-set-contents",children:[v.jsx("li",{children:"JavaScript"}),v.jsx("li",{children:"TypeScript"}),v.jsx("li",{children:"Python"}),v.jsx("li",{children:"Java"})]})]}),v.jsxs("section",{className:"section frontend",children:[v.jsx("div",{className:"label",children:"Frontend"}),v.jsxs("ul",{className:"skill-set-contents",children:[v.jsx("li",{children:"React.js"}),v.jsx("li",{children:"Zustand"}),v.jsx("li",{children:"TanStack Query"}),v.jsx("li",{children:"styled-components"}),v.jsx("li",{children:"Sass"})]})]}),v.jsxs("section",{className:"section backend",children:[v.jsx("div",{className:"label",children:"Backend"}),v.jsxs("ul",{className:"skill-set-contents",children:[v.jsx("li",{children:"Express.js"}),v.jsx("li",{children:"Spring Boot"}),v.jsx("li",{children:"MyBatis"}),v.jsx("li",{children:"MariaDB"}),v.jsx("li",{children:"Firebase"}),v.jsx("li",{children:"MongoDB"})]})]})]})]})}),l0=ge.div`
   background-color: ${({theme:e})=>e.color.backGroundGray};
   width: 75%;
   z-index: 2;
@@ -283,6 +283,68 @@ Error generating stack: `+i.message+`
     align-items: flex-start;
   }
 
+  .language {
+    > ul {
+      > li:first-child {
+        color: #f3cc83;
+      }
+
+      > li:nth-child(2) {
+        color: #40bef0;
+      }
+
+      > li:nth-child(3) {
+        color: #1e6d53;
+      }
+
+      > li:last-child {
+        color: orange;
+      }
+    }
+  }
+
+  .frontend {
+    > ul {
+      > li:first-child {
+        color: #147298;
+      }
+
+      > li:nth-child(2) {
+        color: #987b14;
+      }
+
+      > li:nth-child(3) {
+        color: #ec683b;
+      }
+      > li:nth-child(4) {
+        color: #e3aa97;
+      }
+
+      > li:last-child {
+        color: #b63409;
+      }
+    }
+  }
+
+  .backend {
+    > ul {
+      > li:first-child {
+        color: #bdd8ea;
+      }
+      > li:nth-child(2) {
+        color: #3d6977;
+      }
+
+      > li:nth-child(3) {
+        color: #dc8a34;
+      }
+
+      > li:last-child {
+        color: #3d7740;
+      }
+    }
+  }
+
   .label {
     padding: 1rem;
     margin-right: 1.5rem;
@@ -290,8 +352,14 @@ Error generating stack: `+i.message+`
 
   .section {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    width: 100%;
+  }
+
+  .section:nth-child(2),
+  .section:first-child {
+    border-bottom: 1px solid;
   }
 
   .skill-set-contents {
@@ -487,7 +555,7 @@ Error generating stack: `+i.message+`
   .flipped {
     transform: rotateY(-180deg); /* 상태가 flipped일 때 뒷면 보이도록 */
   }
-`,a0=[{name:"여행 관리/ 공유 웹 서비스",imgSrc:"/images/7days-main.png",summary:"Google Map API 를 이용하여 국내외 여행지를 계획하고 공유하는 커뮤니티 웹 서비스 팀 프로젝트",period:"24.04.23~24.05.24",tech:"TypeScript, react.js, Zutand, React-Query ...",source:"https://github.com/7days-routrip/routrip"},{name:"도서 구매사이트",imgSrc:"/images/bookstore-main.png",summary:"도서 구매사이트 프로젝트입니다.",period:"23.12.11 ~ 24.01.15",tech:"TypeScript, react.js, Zutand, React-Query ...",source:"https://github.com/lugia574/book-store"},{name:"유튜브 클론 사이트",imgSrc:"/images/7days-main.png",summary:"유튜브 클론 사이트 프로젝트입니다.",period:"24.04.23~24.05.24",tech:"TypeScript, react.js, Zutand, React-Query ...",source:"https://github.com/lugia574/nomad-cloneYoutube.github.io"},{name:"모멤텀 앱 클론 사이트",imgSrc:"/images/momentum_main.png",summary:"모멤텀 앱 클론 사이트 프로젝트입니다.",period:"24.04.23~24.05.24",tech:"HTML, JavaScript, CSS",source:"https://github.com/lugia574/Rugia_momentum.github.io"}],c0=()=>v.jsx(f0,{id:"project",children:v.jsxs("div",{className:"project-wrapper",children:[v.jsx(ki,{children:"Projects"}),v.jsx("div",{className:"project-items",children:a0.map((e,t)=>v.jsx(u0,{item:e},t))})]})}),f0=ge.div`
+`,a0=[{name:"여행 관리/ 공유 웹 서비스",imgSrc:"/images/7days-main.png",summary:"Google Map API 를 이용하여 국내외 여행지를 계획하고 공유하는 커뮤니티 웹 서비스 팀 프로젝트",period:"24.04.23~24.05.24",tech:"TypeScript, react.js, Zutand, React-Query ...",source:"https://github.com/7days-routrip/routrip"},{name:"도서 구매사이트",imgSrc:"/images/bookstore-main.png",summary:"도서 구매사이트 프로젝트입니다.",period:"23.12.11 ~ 24.01.15",tech:"TypeScript, react.js, Zutand, React-Query ...",source:"https://github.com/lugia574/book-store"},{name:"개발 중입니다..",imgSrc:"/images/7days-main.png",summary:"개발 중입니다..",period:"24.12.~24.12.",tech:"Java, Spring Boot, MyBatis, react.js, Zutand, React-Query ...",source:"https://github.com/lugia574/nomad-cloneYoutube.github.io"},{name:"모멤텀 앱 클론 사이트",imgSrc:"/images/momentum_main.png",summary:"모멤텀 앱 클론 사이트 프로젝트입니다.",period:"24.04.23~24.05.24",tech:"HTML, JavaScript, CSS",source:"https://github.com/lugia574/Rugia_momentum.github.io"}],c0=()=>v.jsx(f0,{id:"project",children:v.jsxs("div",{className:"project-wrapper",children:[v.jsx(ki,{children:"Projects"}),v.jsx("div",{className:"project-items",children:a0.map((e,t)=>v.jsx(u0,{item:e},t))})]})}),f0=ge.div`
   background-color: ${({theme:e})=>e.color.backGroundGray};
   width: 75%;
   z-index: 2;
