@@ -32,6 +32,8 @@ const Skills = () => {
             <div className="label">Backend</div>
             <ul className="skill-set-contents">
               <li>Express.js</li>
+              <li>Spring Boot</li>
+              <li>MyBatis</li>
               <li>MariaDB</li>
               <li>Firebase</li>
               <li>MongoDB</li>

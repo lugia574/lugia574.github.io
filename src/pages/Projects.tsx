@@ -24,11 +24,11 @@ const PROJECTLIST = [
   },
 
   {
-    name: "유튜브 클론 사이트",
+    name: "개발 중입니다..",
     imgSrc: "/images/7days-main.png",
-    summary: "유튜브 클론 사이트 프로젝트입니다.",
-    period: "24.04.23~24.05.24",
-    tech: "TypeScript, react.js, Zutand, React-Query ...",
+    summary: "개발 중입니다..",
+    period: "24.12.~24.12.",
+    tech: "Java, Spring Boot, MyBatis, react.js, Zutand, React-Query ...",
     source: "https://github.com/lugia574/nomad-cloneYoutube.github.io",
   },
   {
