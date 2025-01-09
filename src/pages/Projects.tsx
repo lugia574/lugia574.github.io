@@ -24,12 +24,12 @@ const PROJECTLIST = [
   },
 
   {
-    name: "개발 중입니다..",
-    imgSrc: "/images/7days-main.png",
-    summary: "개발 중입니다..",
-    period: "24.12.~24.12.",
-    tech: "Java, Spring Boot, MyBatis, react.js, Zutand, React-Query ...",
-    source: "https://github.com/lugia574/nomad-cloneYoutube.github.io",
+    name: "커뮤니티 웹 개발",
+    imgSrc: "/images/react-spring.png",
+    summary: "커뮤니티 웹 게시판 개발",
+    period: "24.12.26~25.01.10",
+    tech: "Java, Spring Boot, JPA, react.js, Zutand, React-Query ...",
+    source: "https://github.com/lugia574/spring-react",
   },
   {
     name: "모멤텀 앱 클론 사이트",
