@@ -1,12 +1,14 @@
-import styled from "styled-components";
-import Title from "../components/common/Title";
+import styled from 'styled-components';
+import Title from '../components/common/Title';
+import TwinkleStar from '../components/effects/TwinkleStar';
+import Star from '../components/effects/Star';
 // interface Props {}
 
 const Skills = () => {
   return (
     <SkillsStyle id="skills">
       <div className="skills-wrapper">
-        <Title children={"Skills"} />
+        <Title children={'Skills'} />
         <div className="skill-set">
           <section className="section language">
             <div className="label label-language">Language</div>
@@ -41,25 +43,27 @@ const Skills = () => {
           </section>
         </div>
       </div>
+      <TwinkleStar />
+      <Star />
     </SkillsStyle>
   );
 };
 
 const SkillsStyle = styled.div`
   background-color: ${({ theme }) => theme.color.backGroundGray};
-  width: 75%;
+  width: 100%;
+  height: 100vh;
   z-index: 2;
   display: flex;
   justify-content: center;
+  padding: 4rem 2rem;
 
   .skills-wrapper {
-    width: 750px;
     display: flex;
     gap: 5rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 4rem 1rem;
   }
 
   .skill-set {
@@ -72,6 +76,7 @@ const SkillsStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    font-size: 1.5rem;
   }
 
   .language {

@@ -1,11 +1,15 @@
-import styled from "styled-components";
-import Star from "../components/effects/Star";
+import styled from 'styled-components';
+import Star from '../components/effects/Star';
+import TwinkleStar from '../components/effects/TwinkleStar';
+import Square from '../components/effects/square';
 // interface Props {}
 
 const Intro = () => {
   return (
     <IntroStyle>
       <h1 className="typing">FrontEnd 개발자 이철욱입니다.</h1>
+      <Square />
+      <TwinkleStar />
       <Star />
     </IntroStyle>
   );
@@ -13,12 +17,12 @@ const Intro = () => {
 
 const IntroStyle = styled.div`
   display: flex;
-
-  background-image: url("/images/portpolio-main.jpg");
+  position: relative;
+  background-image: url('/images/portpolio-main.jpg');
   background-size: cover;
   background-position: top;
   width: 100%;
-  height: 58rem;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
@@ -27,7 +31,7 @@ const IntroStyle = styled.div`
     -moz-user-select: none;
     -ms-use-select: none;
     user-select: none;
-
+    font-size: 4rem;
     text-transform: capitalize;
     white-space: nowrap;
     color: transparent;
@@ -39,7 +43,7 @@ const IntroStyle = styled.div`
   }
 
   .typing::before {
-    content: "FrontEnd 개발자 이철욱입니다.";
+    content: 'FrontEnd 개발자 이철욱입니다.';
     position: absolute;
     top: 0;
     left: 0;

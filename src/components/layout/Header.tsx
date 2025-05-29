@@ -1,18 +1,12 @@
 // interface Props {}
 
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  const handleScrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) section.scrollIntoView({ behavior: "smooth" });
-
-    if (menuOpen) setMenuOpen((prev) => !prev);
-  };
 
   const handleScroll = () => {
     const scrollY = window.scrollY;
@@ -24,10 +18,10 @@ const Header = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -37,54 +31,27 @@ const Header = () => {
         <div className="header-main">
           <div className="logo"></div>
           <nav className="desktop-nav">
-            <div className="" onClick={() => handleScrollToSection("about-me")}>
-              About me
-            </div>
-            <div className="" onClick={() => handleScrollToSection("skills")}>
-              Skills
-            </div>
-            <div
-              className=""
-              onClick={() => handleScrollToSection("archiving")}
-            >
-              Archiving
-            </div>
-            <div className="" onClick={() => handleScrollToSection("project")}>
-              Project
-            </div>
-            <div className="" onClick={() => handleScrollToSection("career")}>
-              Career
-            </div>
+            <Link to={'/'}>Main</Link>
+            <Link to={'/about'}>About me</Link>
+            <Link to={'/skills'}>Skills</Link>
+            <Link to={'/archiving'}>Archiving</Link>
+            <Link to={'/project'}>Project</Link>
+            <Link to={'/career'}>Career</Link>
           </nav>
-          <div
-            className="hamburger modile"
-            onClick={() => setMenuOpen((prev) => !prev)}
-          >
+          <div className="hamburger modile" onClick={() => setMenuOpen(prev => !prev)}>
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
           </div>
         </div>
         <div className="modile-nav modile">
-          <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
-            <div className="" onClick={() => handleScrollToSection("about-me")}>
-              About me
-            </div>
-            <div className="" onClick={() => handleScrollToSection("skills")}>
-              Skills
-            </div>
-            <div
-              className=""
-              onClick={() => handleScrollToSection("archiving")}
-            >
-              Archiving
-            </div>
-            <div className="" onClick={() => handleScrollToSection("project")}>
-              Project
-            </div>
-            <div className="" onClick={() => handleScrollToSection("career")}>
-              Career
-            </div>
+          <nav className={`nav-links ${menuOpen ? 'open' : ''}`}>
+            <Link to={'/'}>Main</Link>
+            <Link to={'/about'}>About me</Link>
+            <Link to={'/skills'}>Skills</Link>
+            <Link to={'/archiving'}>Archiving</Link>
+            <Link to={'/project'}>Project</Link>
+            <Link to={'/career'}>Career</Link>
           </nav>
         </div>
       </div>
@@ -99,9 +66,7 @@ const HeaderStyle = styled.header<{ scrolled: boolean }>`
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: ${({ scrolled, theme }) =>
-      scrolled ? theme.color.black : "transparent"};
-    color: ${({ theme }) => theme.color.white};
+    background-color: ${({ scrolled, theme }) => (scrolled ? theme.color.black : 'transparent')};
     transition: height 0.3s ease-in-out;
     overflow: hidden;
     height: auto; /* 기본 헤더 높이 */
@@ -111,6 +76,10 @@ const HeaderStyle = styled.header<{ scrolled: boolean }>`
     right: 0;
     z-index: 100000;
     font-weight: 600;
+  }
+
+  a {
+    color: ${({ theme }) => theme.color.white};
   }
 
   .header.expanded {

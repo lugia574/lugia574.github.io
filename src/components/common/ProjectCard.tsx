@@ -1,5 +1,5 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState } from 'react';
+import styled from 'styled-components';
 
 interface itemProps {
   item: {
@@ -17,8 +17,8 @@ const ProjectCard = ({ item }: itemProps) => {
 
   return (
     <ProjectCardStyle>
-      <div className="flip-box" onClick={() => setIsFlipped((prev) => !prev)}>
-        <div className={`flip ${isFlipped ? "flipped" : ""}`}>
+      <div className="flip-box" onClick={() => setIsFlipped(prev => !prev)}>
+        <div className={`flip ${isFlipped ? 'flipped' : ''}`}>
           <div className="front">
             <img src={item.imgSrc} alt="프로젝트 이미지" />
             <div className="overlay">
@@ -76,8 +76,8 @@ const ProjectCardStyle = styled.div`
   }
 
   .front img {
-    width: 25rem;
-    height: 25rem;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: top;
     opacity: 0.8;

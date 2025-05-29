@@ -1,5 +1,5 @@
-import { IconType } from "react-icons";
-import styled from "styled-components";
+import { IconType } from 'react-icons';
+import styled from 'styled-components';
 interface Props {
   Icon: IconType;
   label: string;
@@ -25,22 +25,26 @@ const AboutMeCardStyle = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  max-width: 14rem;
-  flex-wrap: nowrap;
   column-gap: 2rem;
   margin: 0 auto;
+  padding: 0 2rem;
   .icon {
     width: 2.5rem;
     height: 2.5rem;
   }
+  .contents {
+    width: 100%;
+  }
 
   .content > :first-child {
     font-weight: 100;
-    font-size: ${({ theme }) => theme.fontSize.xsamll};
+    font-size: ${({ theme }) => theme.fontSize.large};
   }
 
   .content > :last-child {
+    width: 100%;
     font-weight: 600;
+    font-size: ${({ theme }) => theme.fontSize.xlarge};
   }
 
   @media (max-width: 768px) {

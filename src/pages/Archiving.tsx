@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import Title from "../components/common/Title";
+import styled from 'styled-components';
+import Title from '../components/common/Title';
 // interface Props {}
 
 const Archiving = () => {
   return (
     <ArchivingStyle id="archiving">
       <div className="archiving-warpper">
-        <Title children={"Archiving"} />
+        <Title children={'Archiving'} />
         <div className="archiving-set">
           <div className="archiving-box github">
             <a href="https://github.com/lugia574">
@@ -24,12 +24,14 @@ const Archiving = () => {
 
 const ArchivingStyle = styled.div`
   background-color: ${({ theme }) => theme.color.backGroundGray};
-  width: 75%;
+  width: 100%;
+  height: 100vh;
   z-index: 2;
+  padding: 4rem 2rem;
 
   .archiving-warpper {
     display: flex;
-    width: 100%;
+    height: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
