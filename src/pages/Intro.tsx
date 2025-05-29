@@ -7,7 +7,7 @@ import Square from '../components/effects/square';
 const Intro = () => {
   return (
     <IntroStyle>
-      <h1 className="typing">FrontEnd 개발자 이철욱입니다.</h1>
+      <h1 className="typing">FULL STACK 개발자 이철욱입니다.</h1>
       <Square />
       <TwinkleStar />
       <Star />
@@ -43,7 +43,7 @@ const IntroStyle = styled.div`
   }
 
   .typing::before {
-    content: 'FrontEnd 개발자 이철욱입니다.';
+    content: 'FULL STACK 개발자 이철욱입니다.';
     position: absolute;
     top: 0;
     left: 0;
@@ -55,8 +55,8 @@ const IntroStyle = styled.div`
     padding-top: 0.2em;
     white-space: nowrap;
     line-height: 1;
-    border-right: 3px solid ${({ theme }) => theme.color.white};
-    animation: typing 5s steps(25) infinite;
+    border-right: 4px solid ${({ theme }) => theme.color.white};
+    animation: typing 5s steps(12) infinite;
   }
 
   @keyframes typing {
