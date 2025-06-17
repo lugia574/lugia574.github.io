@@ -13,6 +13,14 @@ import Star from '../components/effects/Star';
 
 const PROJECTLIST = [
   {
+    name: '청바지 - 청년 통합 정보 사이트',
+    imgSrc: '/images/bentto.png',
+    summary: '청년 대상 정책 공모전 정보를 제공하며 커뮤니티 활동이 가능한 플랫폼 구축하였습니다',
+    period: '2025.04.24~진행중',
+    tech: 'TypeScript, react.js, Zutand, React-Query, express, MariaDB',
+    source: 'https://github.com/ezen-bentto',
+  },
+  {
     name: '여행 관리/ 공유 웹 서비스',
     imgSrc: '/images/7days-main.png',
     summary:
