@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Skills from './pages/Skills';
 import Archiving from './pages/Archiving';
-import Career from './pages/Career';
 import Intro from './pages/Intro';
 import AboutMe from './pages/AboutMe';
 import Projects from './pages/Projects';
@@ -20,7 +19,6 @@ function App() {
             <Route path="/skills" element={<Skills />} />
             <Route path="/archiving" element={<Archiving />} />
             <Route path="/project" element={<Projects />} />
-            <Route path="/career" element={<Career />} />
           </Route>
         </Routes>
       </PortfolioThemeProvider>

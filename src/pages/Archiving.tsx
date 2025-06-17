@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Title from '../components/common/Title';
+import TwinkleStar from '../components/effects/TwinkleStar';
+import Star from '../components/effects/Star';
 // interface Props {}
 
 const Archiving = () => {
@@ -18,6 +20,8 @@ const Archiving = () => {
           </div>
         </div>
       </div>
+      <TwinkleStar />
+      <Star />
     </ArchivingStyle>
   );
 };

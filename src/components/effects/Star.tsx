@@ -85,7 +85,7 @@ const StarStyle = styled.div<StarStyleProps>`
   z-index: 999;
   overflow: hidden;
   position: absolute;
-  z-index: -1;
+  z-index: 0;
 
   .star {
     position: relative;

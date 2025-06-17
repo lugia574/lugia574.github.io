@@ -36,7 +36,6 @@ const Header = () => {
             <Link to={'/skills'}>Skills</Link>
             <Link to={'/archiving'}>Archiving</Link>
             <Link to={'/project'}>Project</Link>
-            <Link to={'/career'}>Career</Link>
           </nav>
           <div className="hamburger modile" onClick={() => setMenuOpen(prev => !prev)}>
             <span className="bar"></span>
@@ -51,7 +50,6 @@ const Header = () => {
             <Link to={'/skills'}>Skills</Link>
             <Link to={'/archiving'}>Archiving</Link>
             <Link to={'/project'}>Project</Link>
-            <Link to={'/career'}>Career</Link>
           </nav>
         </div>
       </div>
