@@ -440,12 +440,12 @@ Please change the parent <Route path="${c}"> to <Route path="${c==="/"?"*":`${c}
   background-color: ${({theme:e})=>e.color.backGroundGray};
   width: 100%;
   height: 100vh;
-  z-index: 2;
   padding: 4rem 2rem;
 
   .archiving-warpper {
     display: flex;
     height: 100%;
+
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -482,6 +482,8 @@ Please change the parent <Route path="${c}"> to <Route path="${c==="/"?"*":`${c}
 
     .velog {
       background-color: #66cc99;
+      opacity: 0.9;
+      z-index: 9999;
       a {
         font-weight: 600;
         font-style: oblique;
@@ -489,6 +491,7 @@ Please change the parent <Route path="${c}"> to <Route path="${c==="/"?"*":`${c}
     }
 
     .github {
+      z-index: 9999;
       background-color: ${({theme:e})=>e.color.white};
     }
   }
